@@ -85,7 +85,7 @@ const FinishPage = ({navigation}) => {
   return(
     <View style={styles.container}>
       <Text style={styles.textStyle}>Success</Text>
-      {<Button style={buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>}
+      {<Button style={styles.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>}
     <StatusBar style="auto" />
     </View>
   )
