@@ -40,7 +40,7 @@ const IncrPage = ({navigation}) => {
     if(!(numToIncr.trim())){
       alert('Number is empty');
     }else if(!(parseInt(numToIncr))){
-      alert('Number is not a number');
+      alert('Returning non-number quantities is not supported at this time');
     }else{
       API.incr("945eadcc-319a-4c21-89f2-1901defd742e", parseInt(numToIncr), true, navigation);
     }
@@ -53,6 +53,7 @@ const IncrPage = ({navigation}) => {
         onChangeText={
           (value)=>setNumToIncr(value)
         }
+        keyboardType="numeric"
       />
       <Button onPress={() => checkIncrease()} title="Submit" color="#841584" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true, navigation)} title="Increase by 5" color="#841584" />*/}
@@ -80,7 +81,7 @@ const DecrPage = ({navigation}) => {
     if(!(numToDecr.trim())){
       alert('Number is empty');
     }else if(!(parseInt(numToDecr))){
-      alert('Number is not a number');
+      alert('Taking non-number quantities is not supported at this time');
     }else{
       API.incr("945eadcc-319a-4c21-89f2-1901defd742e", parseInt(numToDecr), false, navigation);
     }
@@ -92,6 +93,7 @@ const DecrPage = ({navigation}) => {
         onChangeText={
           (value)=>setNumToDecr(value)
         }
+        keyboardType="numeric"
       />
       <Button onPress={() => checkDecrease()} title="Submit" color="#841584" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
