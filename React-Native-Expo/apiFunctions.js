@@ -1,3 +1,8 @@
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+//get All**********************************************************************************
+
 async function getAll(){
     const url = 'https://api.quartzy.com/inventory-items';
   
@@ -14,6 +19,8 @@ async function getAll(){
     console.log(text);
   }
   
+//Get Quantity************************************************************************
+
   async function getQuantity(itemID){
     const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
     const response = await fetch(url, {
@@ -41,7 +48,9 @@ async function getAll(){
     
   }
   
-  async function incr(itemID, numIncr, incr){
+//Change Stock**********************************************************************************
+
+  async function incr(itemID, numIncr, incr, navigation){
     let curQuant = await getQuantity(itemID);
     if(incr){
         newQuant = parseInt(curQuant) + numIncr;
@@ -66,6 +75,7 @@ async function getAll(){
     const text = await response.text();
     response.json().then(json => {console.log(json)})
     console.log(text);
+    navigation.navigate('Success Page');
   
   }
 
