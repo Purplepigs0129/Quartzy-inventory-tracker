@@ -73,9 +73,19 @@ async function getAll(){
     });
   
     const text = await response.text();
+    const status = response.status;
     response.json().then(json => {console.log(json)})
     console.log(text);
-    navigation.navigate('Success Page');
+    if(status == '200'){
+        navigation.navigate('Success Page');
+    }else if(status == 401){
+        alert('Error 401: Request Unaurhorized\nPlease reset your Access Token')
+    }else if(status == 404){
+        alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
+    }else{
+        alert('Unknown Error')
+    }
+    
   
   }
 
