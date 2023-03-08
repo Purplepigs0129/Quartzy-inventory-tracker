@@ -78,9 +78,9 @@ async function getAll(){
     console.log(text);
     if(status == '200'){
         navigation.navigate('Success Page');
-    }else if(status == 401){
+    }else if(status == '401'){
         alert('Error 401: Request Unaurhorized\nPlease reset your Access Token')
-    }else if(status == 404){
+    }else if(status == '404'){
         alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
     }else{
         alert('Unknown Error')

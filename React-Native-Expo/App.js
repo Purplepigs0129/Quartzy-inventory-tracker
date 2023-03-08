@@ -71,7 +71,7 @@ const IncrPage = ({navigation}) => {
         }
         keyboardType="numeric"
       />
-      <Button style={styles.buttonStyle} onPress={() => checkIncrease()} title="Submit" color="#841584" />
+      <Button style={styles.buttonStyle} onPress={() => checkIncrease()} title="Submit" color="#ed5928" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true, navigation)} title="Increase by 5" color="#841584" />*/}
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
@@ -85,7 +85,7 @@ const FinishPage = ({navigation}) => {
   return(
     <View style={styles.container}>
       <Text style={styles.textStyle}>Success</Text>
-      {<Button style={styles.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>}
+      {<Button style={styles.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#ed5928"/>}
     <StatusBar style="auto" />
     </View>
   )
@@ -115,7 +115,7 @@ const DecrPage = ({navigation}) => {
         }
         keyboardType="numeric"
       />
-      <Button style={styles.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#841584" />
+      <Button style={styles.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#ed5928" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
@@ -126,7 +126,7 @@ const DecrPage = ({navigation}) => {
 const GetPage = ({navigation}) => {
   return(
     <View style={styles.container}>
-      <Button style={styles.buttonStyle} onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#841584" />
+      <Button style={styles.buttonStyle} onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#ed5928" />
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584" />*/}
     <StatusBar style="auto" />
     </View>
@@ -137,11 +137,11 @@ const GetPage = ({navigation}) => {
 const HomeScreen = ({navigation}) => {
   return(
     <View style={styles.container}>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#841584"/>
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#ed5928"/>
       <Text></Text>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Take Items')} title="Take Items" color="#841584"/>
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Take Items')} title="Take Items" color="#ed5928"/>
       <Text></Text>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Get Item Data')} title="Get Item Data" color="#841584"/>
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Get Item Data')} title="Get Item Data" color="#ed5928"/>
       <StatusBar style="auto" />
     </View>
   
