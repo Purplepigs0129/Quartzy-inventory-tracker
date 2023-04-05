@@ -10,7 +10,7 @@ import * as API from './apiFunctions.js'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#6D6E71',
     justifyContent: 'center',
   },
   input: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
     margin: 10,
-    color: '#A10022',
+    
   },
 });
 
@@ -72,7 +72,7 @@ const IncrPage = ({navigation}) => {
         }
         keyboardType="numeric"
       />
-      <Button style={styles.buttonStyle} onPress={() => checkIncrease()} title="Submit" />
+      <Button style={styles.buttonStyle} onPress={() => checkIncrease()} title="Submit" color="#a10022" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true, navigation)} title="Increase by 5" color="#841584" />*/}
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
@@ -86,7 +86,7 @@ const FinishPage = ({navigation}) => {
   return(
     <View style={styles.container}>
       <Text style={styles.textStyle}>Success</Text>
-      {<Button style={styles.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" />}
+      {<Button style={styles.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#a10022"/>}
     <StatusBar style="auto" />
     </View>
   )
@@ -116,7 +116,7 @@ const DecrPage = ({navigation}) => {
         }
         keyboardType="numeric"
       />
-      <Button style={styles.buttonStyle} onPress={() => checkDecrease()} title="Submit"  />
+      <Button style={styles.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#a10022" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
@@ -127,7 +127,7 @@ const DecrPage = ({navigation}) => {
 const GetPage = ({navigation}) => {
   return(
     <View style={styles.container}>
-      <Button style={styles.buttonStyle} onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity"  />
+      <Button style={styles.buttonStyle} onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#a10022" />
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584" />*/}
     <StatusBar style="auto" />
     </View>
@@ -138,11 +138,11 @@ const GetPage = ({navigation}) => {
 const HomeScreen = ({navigation}) => {
   return(
     <View style={styles.container}>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" />
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#a10022"/>
       <Text></Text>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Take Items')} title="Take Items" />
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Take Items')} title="Take Items" color="#a10022"/>
       <Text></Text>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Get Item Data')} title="Get Item Data" />
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Get Item Data')} title="Get Item Data" color="#a10022"/>
       <StatusBar style="auto" />
     </View>
   
