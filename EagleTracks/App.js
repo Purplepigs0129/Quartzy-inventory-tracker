@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as API from './apiFunctions.js'
 
 //Initialization*****************************************************************
+//test comment
 
 const styles = StyleSheet.create({
   container: {
