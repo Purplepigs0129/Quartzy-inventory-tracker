@@ -89,7 +89,7 @@ const IncrPage = ({navigation}) => {
       <Text style={styles.textStyle}>ID of item to return:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Item to return"
+        placeholder=" Item to return"
         onChangeText={
           (value)=>setItemToIncr(value)
         }
@@ -98,7 +98,7 @@ const IncrPage = ({navigation}) => {
       <Text style={styles.textStyle}>Number of items to be returned:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Num to be returned"
+        placeholder=" Num to be returned"
         onChangeText={
           (value)=>setNumToIncr(value)
         }
@@ -148,7 +148,7 @@ const DecrPage = ({navigation}) => {
       <Text style={styles.textStyle}>ID of item being taken:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Item to take"
+        placeholder=" Item to take"
         onChangeText={
           (value)=>setItemToDecr(value)
         }
@@ -157,7 +157,7 @@ const DecrPage = ({navigation}) => {
       <Text style={styles.textStyle}>Number of items to be taken:</Text>
       <TextInput
         style={styles.input}
-        placeholder="Number to be taken"
+        placeholder=" Number to be taken"
         onChangeText={
           (value)=>setNumToDecr(value)
         }
