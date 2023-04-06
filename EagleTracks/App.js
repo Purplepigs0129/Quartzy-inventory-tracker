@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView, Button, TextInput} from 'react-na
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as API from './apiFunctions.js'
+import itemList from './itemList.json'
 
 //Initialization*****************************************************************
 //test comment
@@ -49,20 +50,51 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 
 //IncrPage*****************************************************************
 
+//read text files
+function checkFiles(serial){
+  //const itemData = require("./itemList.json")
+  //console.log("in function")//test code
+  return itemList[serial]
+  //return itemList[serial]
+  /*if(serial == "A00002"){
+      return "945eadcc-319a-4c21-89f2-1901defd742e"
+  }*/
+  
+  
+}
+//end read text files
+
 const IncrPage = ({navigation}) => {
   const [numToIncr, setNumToIncr] = useState('');
+  const [itemToIncr, setItemToIncr] = useState('');
   const checkIncrease = () => {
     if(!(numToIncr.trim())){
       alert('Number is empty');
     }else if(!(parseInt(numToIncr))){
       alert('Returning non-number quantities is not supported at this time');
+    }else if(!(itemToIncr.trim())){
+      alert('Item is empty');
     }else{
-      API.incr("945eadcc-319a-4c21-89f2-1901defd742e", parseInt(numToIncr), true, navigation);
+      let itemID = checkFiles(itemToIncr)
+      if(!itemID.trim()){
+        alert("ItemID returned Empty")
+      }else{
+        API.incr(itemID, parseInt(numToIncr), true, navigation);
+      }
     }
   }
   
   return(
     <View style={styles.container}>
+      <Text style={styles.textStyle}>ID of item to return:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Item to return"
+        onChangeText={
+          (value)=>setItemToIncr(value)
+        }
+        
+      />
       <Text style={styles.textStyle}>Number of items to be returned:</Text>
       <TextInput
         style={styles.input}
@@ -96,17 +128,32 @@ const FinishPage = ({navigation}) => {
 
 const DecrPage = ({navigation}) => {
   const [numToDecr, setNumToDecr] = useState('');
+  const [itemToDecr, setItemToDecr] = useState('');
   const checkDecrease = () => {
     if(!(numToDecr.trim())){
       alert('Number is empty');
     }else if(!(parseInt(numToDecr))){
       alert('Taking non-number quantities is not supported at this time');
     }else{
-      API.incr("945eadcc-319a-4c21-89f2-1901defd742e", parseInt(numToDecr), false, navigation);
+      let itemID = checkFiles(itemToDecr)
+      if(!itemID.trim()){
+        alert("ItemID returned Empty")
+      }else{
+        API.incr(itemID, parseInt(numToDecr), false, navigation);
+      }
     }
   }
   return(
     <View style={styles.container}>
+      <Text style={styles.textStyle}>ID of item being taken:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Item to take"
+        onChangeText={
+          (value)=>setItemToDecr(value)
+        }
+        
+      />
       <Text style={styles.textStyle}>Number of items to be taken:</Text>
       <TextInput
         style={styles.input}

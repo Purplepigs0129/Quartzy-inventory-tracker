@@ -51,6 +51,7 @@ async function getAll(){
 //Change Stock**********************************************************************************
 
   async function incr(itemID, numIncr, incr, navigation){
+    
     let curQuant = await getQuantity(itemID);
     if(incr){
         newQuant = parseInt(curQuant) + numIncr;
