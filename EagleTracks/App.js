@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
   textStyle: {
     margin: 7,
     alignItems: 'flex-start',
+    color: '#fff',
   },
   buttonStyle: {
     alignItems: 'center',
     margin: 10,
     
   },
+  placeholder: {
+    color: '#bababa',
+  }
 });
 
 const Stack = createNativeStackNavigator();
@@ -89,7 +93,7 @@ const IncrPage = ({navigation}) => {
       <Text style={styles.textStyle}>ID of item to return:</Text>
       <TextInput
         style={styles.input}
-        placeholder=" Item to return"
+        placeholder=" Item's ID being returned"
         onChangeText={
           (value)=>setItemToIncr(value)
         }
@@ -98,7 +102,7 @@ const IncrPage = ({navigation}) => {
       <Text style={styles.textStyle}>Number of items to be returned:</Text>
       <TextInput
         style={styles.input}
-        placeholder=" Num to be returned"
+        placeholder=" # of item to be returned"
         onChangeText={
           (value)=>setNumToIncr(value)
         }
@@ -148,7 +152,7 @@ const DecrPage = ({navigation}) => {
       <Text style={styles.textStyle}>ID of item being taken:</Text>
       <TextInput
         style={styles.input}
-        placeholder=" Item to take"
+        placeholder=" Item's ID being taken"
         onChangeText={
           (value)=>setItemToDecr(value)
         }
@@ -157,7 +161,7 @@ const DecrPage = ({navigation}) => {
       <Text style={styles.textStyle}>Number of items to be taken:</Text>
       <TextInput
         style={styles.input}
-        placeholder=" Number to be taken"
+        placeholder=" # of the item to be taken"
         onChangeText={
           (value)=>setNumToDecr(value)
         }
