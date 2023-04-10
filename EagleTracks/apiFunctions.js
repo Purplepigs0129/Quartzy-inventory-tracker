@@ -31,18 +31,21 @@ async function getAll(){
         
     });
   
-    const text = await response.text();
-    response.json().then(json => {console.log(json)})
-    console.log(text);
+    const resp = await response.json();
+    //response.then(json => {console.log(json)})
+    console.log(resp);
+    /*
     let body = text.replace("b'", '');
     body = body.replace("[{", '');
     let cont = body.split(",");
     let quantity = cont[6];
     quantity = quantity.replace('"', '');
     quant = quantity.split(":");
-    
     itemQuant = quant[1].replace('"', '');
     itemQuant = itemQuant.replace('"', '')
+    console.log(itemQuant);
+    */
+    itemQuant = resp['quantity'];
     console.log(itemQuant);
     return parseInt(itemQuant);
     
