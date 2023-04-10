@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import login from './login.json'
+import login from './loginCred.json'
 
 //get All**********************************************************************************
 
