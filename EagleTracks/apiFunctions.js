@@ -1,5 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import login from './login.json'
 
 //get All**********************************************************************************
 
@@ -9,7 +10,7 @@ async function getAll(){
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
-            'Access-Token': 'XZfaakimE7JyfmwuO3RdbqMminXu83rr2wUuhCHp',
+            'Access-Token': login['accessToken'],
         },
         
     });
@@ -26,7 +27,7 @@ async function getAll(){
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
-            'Access-Token': 'XZfaakimE7JyfmwuO3RdbqMminXu83rr2wUuhCHp',
+            'Access-Token': login['accessToken'],
         },
         
     });
@@ -81,7 +82,7 @@ async function getAll(){
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
-            'Access-Token': 'XZfaakimE7JyfmwuO3RdbqMminXu83rr2wUuhCHp',
+            'Access-Token': login['accessToken'],
             'Content-Type': 'application/json',
         },
         body: data,
