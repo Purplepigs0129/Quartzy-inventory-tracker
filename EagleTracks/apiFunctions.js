@@ -33,6 +33,7 @@ async function getAll(){
   
     const resp = await response.json();
     //response.then(json => {console.log(json)})
+    const status = response.status;
     console.log(resp);
     /*
     let body = text.replace("b'", '');
@@ -45,9 +46,20 @@ async function getAll(){
     itemQuant = itemQuant.replace('"', '')
     console.log(itemQuant);
     */
-    itemQuant = resp['quantity'];
-    console.log(itemQuant);
-    return parseInt(itemQuant);
+    
+    response.json().then(json => {console.log(json)})
+    
+    if(status == '200'){
+        itemQuant = resp['quantity'];
+        console.log(itemQuant);
+        return parseInt(itemQuant);
+    }else if(status == '401'){
+        alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
+    }else if(status == '404'){
+        alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
+    }else{
+        alert('Unknown Error')
+    }
     
   }
   
