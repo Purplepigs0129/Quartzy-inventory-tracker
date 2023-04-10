@@ -1,5 +1,6 @@
 node_modules/
 .expo/
+loginCred.json
 dist/
 npm-debug.*
 *.jks
@@ -9,7 +10,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-login.json
 
 # macOS
 .DS_Store
