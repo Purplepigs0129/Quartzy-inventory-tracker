@@ -56,10 +56,17 @@ async function getAll(){
         return parseInt(itemQuant);
     }else if(status == '401'){
         alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
+        console.log("logged unauthorized in quantity")
+        return "NaN"
     }else if(status == '404'){
         alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
+        console.log("logged not found in quantity")
+        return "NaN"
     }else{
         alert('Unknown Error')
+        console.log("logged unknown error in quantity")
+        return "NaN"
+        
     }
     
   }
@@ -69,40 +76,45 @@ async function getAll(){
   async function incr(itemID, numIncr, incr, navigation){
     
     let curQuant = await getQuantity(itemID);
-    if(incr){
-        newQuant = parseInt(curQuant) + numIncr;
-    }else{
-        newQuant = parseInt(curQuant) - numIncr;
-    }
-    console.log(newQuant)
-    const data = '{"quantity": "'.concat(String(newQuant)).concat('"}')
-  
-    const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
-    const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Access-Token': login['accessToken'],
-            'Content-Type': 'application/json',
-        },
-        body: data,
-        
-    });
-  
-    const text = await response.text();
-    const status = response.status;
-    response.json().then(json => {console.log(json)})
-    console.log(text);
-    if(status == '200'){
-        navigation.navigate('Success Page');
-    }else if(status == '401'){
-        alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
-    }else if(status == '404'){
-        alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
-    }else{
-        alert('Unknown Error')
-    }
+    if (curQuant != "NaN"){
+        if(incr){
+            newQuant = parseInt(curQuant) + numIncr;
+        }else{
+            newQuant = parseInt(curQuant) - numIncr;
+        }
+        console.log(newQuant)
+        const data = '{"quantity": "'.concat(String(newQuant)).concat('"}')
     
+        const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Access-Token': login['accessToken'],
+                'Content-Type': 'application/json',
+            },
+            body: data,
+            
+        });
+    
+        const text = await response.text();
+        const status = response.status;
+        response.json().then(json => {console.log(json)})
+        console.log(text);
+        if(status == '200'){
+            navigation.navigate('Success Page');
+        }else if(status == '401'){
+            alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
+            console.log("Logged unauthorized in incr")
+            
+        }else if(status == '404'){
+            alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
+            console.log("Logged item not found in incr")
+        }else{
+            alert('Unknown Error')
+            console.log("Logged unknown error in incr")
+        }
+    }
   
   }
 
