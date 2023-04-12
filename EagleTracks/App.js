@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as API from './apiFunctions.js'
 import itemList from './itemList.json'
+import login from './loginCred.json'
 
 //Initialization*****************************************************************
 
@@ -175,25 +176,103 @@ const DecrPage = ({navigation}) => {
     )
 }
 
-const GetPage = ({navigation}) => {
+const AddPage = ({navigation}) => {
+  const [newID, setNewID] = useState('');
+  const [newSerial, setNewSerial] = useState('');
+  const checkItem = () => {
+    if(!(newID.trim())){
+      alert('Item ID is empty');
+    }else if(!(newSerial.trim())){
+      alert('Serial number is empty');
+    }else{
+      itemList[newSerial] = newID;
+      console.log(itemList[newSerial]);
+      navigation.navigate('Success Page');
+    }
+  }
   return(
     <View style={styles.container}>
-      <Button style={styles.buttonStyle} onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#a10022" />
-      {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584" />*/}
+      <Text style={styles.textStyle}>Serial of new item:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" New Serial"
+        onChangeText={
+          (value)=>setNewSerial(value)
+        }
+        
+      />
+      <Text style={styles.textStyle}>ID of new item:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" ID of new item"
+        onChangeText={
+          (value)=>setNewID(value)
+        }
+        
+      />
+      <Button style={styles.buttonStyle} onPress={() => checkItem()} title="Submit" color="#a10022" />
+      {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
+      {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
     </View>
-  )
+    )
+}
+
+const CredPage = ({navigation}) => {
+  const [newAccess, setAccess] = useState('');
+  const [newLab, setLab] = useState('');
+  const checkAccess = () => {
+    if(!(newAccess.trim())){
+      alert('Item Access Token is empty');
+    }else if(!(newLab.trim())){
+      alert('Lab ID is empty');
+    }else{
+      login['accessToken'] = newAccess
+      login['labID'] = newLab
+      console.log(login['accessToken'])
+      console.log(login['labID'])
+      navigation.navigate('Success Page');
+    }
+  }
+  return(
+    <View style={styles.container}>
+      <Text style={styles.textStyle}>Access Token:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Access Token"
+        onChangeText={
+          (value)=>setAccess(value)
+        }
+        
+      />
+      <Text style={styles.textStyle}>Lab ID:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Lab ID"
+        onChangeText={
+          (value)=>setLab(value)
+        }
+        
+      />
+      <Button style={styles.buttonStyle} onPress={() => checkAccess()} title="Submit" color="#a10022" />
+      {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
+      {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
+    <StatusBar style="auto" />
+    </View>
+    )
 }
 
 
 const HomeScreen = ({navigation}) => {
   return(
     <View style={styles.container}>
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Change Credentials')} title="Change Credentials" color="#a10022"/>
+      <Text></Text>
       <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#a10022"/>
       <Text></Text>
       <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Take Items')} title="Take Items" color="#a10022"/>
       <Text></Text>
-      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Get Item Data')} title="Get Item Data" color="#a10022"/>
+      <Button style={styles.buttonStyle} onPress={() => navigation.navigate('Add New Item')} title="Add New Item" color="#a10022"/>
       <StatusBar style="auto" />
     </View>
   
@@ -215,6 +294,10 @@ const App = () => {
           component = {HomeScreen}
         />
         <Stack.Screen
+          name = "Change Credentials"
+          component = {CredPage}
+        />
+        <Stack.Screen
           name = "Return Items"
           component = {IncrPage}
         />
@@ -223,8 +306,8 @@ const App = () => {
           component = {DecrPage}
         />
         <Stack.Screen
-          name = "Get Item Data"
-          component = {GetPage}
+          name = "Add New Item"
+          component = {AddPage}
         />
         <Stack.Screen
           name = "Success Page"
