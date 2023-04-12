@@ -59,8 +59,13 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 function checkFiles(serial){
   //const itemData = require("./itemList.json")
   //console.log("in function")//test code
-  if(itemList.hasOwnProperty(serial)){
-    return itemList[serial]
+  if(itemList.hasOwnProperty(login['labID'])){
+    let temp = itemList[login['labID']]
+    if(temp.hasOwnProperty(serial)){
+      return temp[serial]
+    }else{
+      return ''
+    }
   }else{
     return ''
   }
