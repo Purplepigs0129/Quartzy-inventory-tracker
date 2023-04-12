@@ -83,7 +83,11 @@ const IncrPage = ({navigation}) => {
       alert('Returning non-number quantities is not supported at this time');
     }else if(!(itemToIncr.trim())){
       alert('Item is empty');
-    }else{
+    }else if(!(login['accessToken'])){
+      alert('Missing access token.  Please enter your access token.')
+      navigation.navigate("Change Credentials")
+    }
+    else{
       let itemID = checkFiles(itemToIncr)
       if(!itemID.trim()){
         alert("ItemID not present, please add the item")
@@ -154,6 +158,9 @@ const DecrPage = ({navigation}) => {
       alert('Number is empty');
     }else if(!(parseInt(numToDecr))){
       alert('Taking non-number quantities is not supported at this time');
+    }else if(!(login['accessToken'])){
+      alert('Missing access token.  Please enter your access token.')
+      navigation.navigate("Change Credentials")
     }else{
       let itemID = checkFiles(itemToDecr)
       if(!itemID.trim()){
