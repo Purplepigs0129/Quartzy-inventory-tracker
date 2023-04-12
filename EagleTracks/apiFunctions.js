@@ -114,6 +114,8 @@ async function getAll(){
             alert('Unknown Error')
             console.log("Logged unknown error in incr")
         }
+    }else{
+        navigation.goBack();
     }
   
   }
