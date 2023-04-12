@@ -59,7 +59,11 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 function checkFiles(serial){
   //const itemData = require("./itemList.json")
   //console.log("in function")//test code
-  return itemList[serial]
+  if(itemList.hasOwnProperty(serial)){
+    return itemList[serial]
+  }else{
+    return ''
+  }
   //return itemList[serial]
   /*if(serial == "A00002"){
       return "945eadcc-319a-4c21-89f2-1901defd742e"
@@ -82,7 +86,7 @@ const IncrPage = ({navigation}) => {
     }else{
       let itemID = checkFiles(itemToIncr)
       if(!itemID.trim()){
-        alert("ItemID returned Empty")
+        alert("ItemID not present, please add the item")
       }else{
         API.incr(itemID, parseInt(numToIncr), true, navigation);
         navigation.navigate('Working Page');
@@ -153,7 +157,7 @@ const DecrPage = ({navigation}) => {
     }else{
       let itemID = checkFiles(itemToDecr)
       if(!itemID.trim()){
-        alert("ItemID returned Empty")
+        alert("ItemID not present, please add the item")
       }else{
         API.incr(itemID, parseInt(numToDecr), false, navigation);
         navigation.navigate('Working Page');
