@@ -85,6 +85,7 @@ const IncrPage = ({navigation}) => {
         alert("ItemID returned Empty")
       }else{
         API.incr(itemID, parseInt(numToIncr), true, navigation);
+        navigation.navigate('Working Page');
       }
     }
   }
@@ -119,6 +120,16 @@ const IncrPage = ({navigation}) => {
 
 //End Increase Page*****************************************
 
+const WorkPage = ({navigation}) => {
+  return(
+    <View style={styles.container}>
+      <Text style={styles.textStyle}>Working...</Text>
+    <StatusBar style="auto" />
+    </View>
+  )
+}
+
+
 const FinishPage = ({navigation}) => {
   return(
     <View style={styles.container}>
@@ -145,6 +156,7 @@ const DecrPage = ({navigation}) => {
         alert("ItemID returned Empty")
       }else{
         API.incr(itemID, parseInt(numToDecr), false, navigation);
+        navigation.navigate('Working Page');
       }
     }
   }
@@ -308,6 +320,10 @@ const App = () => {
         <Stack.Screen
           name = "Add New Item"
           component = {AddPage}
+        />
+        <Stack.Screen
+          name = "Working Page"
+          component = {WorkPage}
         />
         <Stack.Screen
           name = "Success Page"
