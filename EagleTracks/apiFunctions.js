@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import login from './loginCred.json'
 
-//get All**********************************************************************************
+//Get All**********************************************************************************
 
 async function getAll(){
     const url = 'https://api.quartzy.com/inventory-items';
