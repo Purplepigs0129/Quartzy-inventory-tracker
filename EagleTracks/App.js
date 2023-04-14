@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
+import { StyleSheet, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as API from './apiFunctions.js'
 import itemList from './itemList.json'
 import login from './loginCred.json'
+import Checkbox from 'expo-checkbox'
 
 //Initialization*****************************************************************
 
@@ -14,6 +15,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#6D6E71',
     justifyContent: 'center',
+    maxHeight: '100%',//for android buttons at bottom
+
+  },
+  scrollView:{
+    backgroundColor: '#6D6E71'
   },
   input: {
     margin: 7,
@@ -34,6 +40,13 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     color: '#bababa',
+  },
+  selection: {
+    flexDirection: 'row',
+    alignItems: 'right',
+  },
+  checkbox: {
+    margin: 8,
   }
 });
 
@@ -81,6 +94,7 @@ function checkFiles(serial){
 const IncrPage = ({navigation}) => {
   const [numToIncr, setNumToIncr] = useState('');
   const [itemToIncr, setItemToIncr] = useState('');
+
   const checkIncrease = () => {
     if(!(numToIncr.trim())){
       alert('Number is empty');
@@ -158,9 +172,28 @@ const FinishPage = ({navigation}) => {
 const DecrPage = ({navigation}) => {
   const [numToDecr, setNumToDecr] = useState('');
   const [itemToDecr, setItemToDecr] = useState('');
+  const [studentName, setStudentName] = useState('');
+  const [instName, setInstName] = useState('');
+  const [className, setClassName] = useState('');
+  const [roomNum, setRoomNum] = useState('');
+  const [toReturn, setToReturn] = useState(false);
+  const [itemName, setItemName] = useState('');
+
   const checkDecrease = () => {
     if(!(numToDecr.trim())){
       alert('Number is empty');
+    }else if(!(itemToDecr.trim())){
+      alert('Item is empty');
+    }else if(!(studentName.trim())){
+      alert('Item is empty');
+    }else if(!(instName.trim())){
+      alert('Item is empty');
+    }else if(!(itemName.trim())){
+      alert('Item is empty');
+    }else if(!(roomNum.trim())){
+      alert('Item is empty');
+    }else if(!(className.trim())){
+      alert('Item is empty');
     }else if(!(parseInt(numToDecr))){
       alert('Taking non-number quantities is not supported at this time');
     }else if(!(login['accessToken'])){
@@ -177,7 +210,50 @@ const DecrPage = ({navigation}) => {
     }
   }
   return(
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+      <Text style={styles.textStyle}>Class/Lab:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Class/Lab"
+        onChangeText={
+          (value)=>setClassName(value)
+        }
+      />
+      <Text style={styles.textStyle}>Room Number:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Room Number"
+        onChangeText={
+          (value)=>setRoomNum(value)
+        }
+      />
+      <Text style={styles.textStyle}>Instructor/PI:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Instructor/PI"
+        onChangeText={
+          (value)=>setInstName(value)
+        }
+      />
+      <Text style={styles.textStyle}>Group/Name:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Group/Name"
+        onChangeText={
+          (value)=>setStudentName(value)
+        }
+      />
+
+      {/* Item Checkout Section */}
+      <Text style={styles.textStyle}>Item Name:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder=" Item Name"
+        onChangeText={
+          (value)=>setItemName(value)
+        }
+      />
       <Text style={styles.textStyle}>ID of item being taken:</Text>
       <TextInput
         style={styles.input}
@@ -196,11 +272,16 @@ const DecrPage = ({navigation}) => {
         }
         keyboardType="numeric"
       />
+      <Text style={styles.textStyle}>Will item be returned:</Text>
+      <Checkbox style={styles.checkbox} value={toReturn} onValueChange={setToReturn} color={toReturn ? '00ff00' : '#000000'}/>
+      
+      
       <Button style={styles.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#a10022" />
       {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
       {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
     <StatusBar style="auto" />
-    </View>
+    </ScrollView>
+    </SafeAreaView>
     )
 }
 
