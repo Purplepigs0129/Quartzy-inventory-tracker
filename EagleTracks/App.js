@@ -7,6 +7,7 @@ import * as API from './apiFunctions.js'
 import itemList from './itemList.json'
 import login from './loginCred.json'
 import Checkbox from 'expo-checkbox'
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 //Initialization*****************************************************************
 
