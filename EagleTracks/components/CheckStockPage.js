@@ -7,14 +7,36 @@ import login from '../loginCred.json'
 
 const ReturnPage = ({navigation, style}) => {
     
-    const [formValues, setFormValues] = useState([{ itemToCheck: "", numNeeded : ""}]);
+    const [formValues, setFormValues] = useState([{ itemToCheck: "", numNeeded: "", resp: ""}]);
     
 
     
     const checkFields = () => {
-      for(i = 0; i < formValues.length; i++){
-        console.log(formValues[i])
-      }
+        let testRun = true
+        for (let i = 0; i < formValues.length; i++){
+            //console.log(formValues[i].itemToCheck)
+            if(!(formValues[i].itemToCheck.trim())){
+                testRun = false
+                alert(`Item ${i + 1} is not filled in`)
+            } else if(!(formValues[i].numNeeded.trim())){
+                testRun = false
+                alert(`Amount needed for ${i + 1} is not filled in`)
+            } else if(!(parseInt(formValues[i].numNeeded))){
+                testRun = false
+                alert(`Amount needed for item ${i + 1} is not a number`)
+            }
+        }
+
+        if(!(login['accessToken'])){
+            testRun = false
+            alert('Missing access token.  Please enter your access token.')
+            navigation.navigate("Change Credentials")
+        }
+
+        if(testRun){
+            API.checkBatch(formValues, navigation);
+            navigation.navigate('Working Page')
+        }
     }
     
 
@@ -22,7 +44,7 @@ const ReturnPage = ({navigation, style}) => {
 
         const _formValues = [...formValues]
         _formValues[index].itemToCheck = text;
-        console.log(text)
+        //console.log(text)
         setFormValues(_formValues)
       }
 

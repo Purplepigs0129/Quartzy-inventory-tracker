@@ -1,5 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import itemList from './itemList.json'
 import login from './loginCred.json'
 
 //Get All**********************************************************************************
@@ -19,7 +20,68 @@ async function getAll(){
     response.json().then(json => {console.log(json)})
     console.log(text);
   }
+//
+
+const checkFiles = (serial) => {
+    if(itemList.hasOwnProperty(login['labID'])){
+        let temp = itemList[login['labID']]
+        if(temp.hasOwnProperty(serial)){
+          return temp[serial]
+        }else{
+          return ''
+        }
+      }else{
+        return ''
+      }
+  }
+
+//Check Batch
+
+  async function checkBatch(formValues, navigation){
+    const nav = true;
+    for (let i = 0; i < formValues.length; i++){
+        console.log(formValues[i].itemToCheck)
+        const itemID = checkFiles(formValues[i].itemToCheck)
+        if(!(itemID.trim())){
+            alert(`Item ${i} is not present in item list, please update item list`)
+            nav = false
+            break
+        }
+
+        const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
+        const response = await fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Access-Token': login['accessToken'],
+            },
+            
+        });
   
+        const quantResp = await response.json();
+        
+        if(response.status != '200'){
+            alert(`Error in handling of item ${i + 1}.  Please notify your instructor`)
+            nav = false
+            break
+        }
+        
+        const quant = quantResp['quantity']
+        
+        if(parseInt(formValues[i].numNeeded) <= quant){
+            str = `You have enough of ${formValues[i].itemToCheck} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
+        }else{
+            str = `You do not have enough of ${formValues[i].itemToCheck} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
+        }
+        formValues[i].resp = str;
+        console.log(formValues[i].resp)
+    }
+
+    //navigation.navigate('Results Page')
+    if(nav){
+        navigation.navigate('Results Page', {formValues})
+    }
+  }
+
 //Get Quantity************************************************************************
 
   async function getQuantity(itemID){
@@ -120,4 +182,4 @@ async function getAll(){
   
   }
 
-  export {getAll, getQuantity, incr};
+  export {checkFiles, getAll, checkBatch, getQuantity, incr};
