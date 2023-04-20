@@ -11,6 +11,8 @@ const HomePage = ({navigation, style}) => {
         <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Checkout Items')} title="Checkout Items" color="#a10022"/>
         <Text></Text>
+        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Check Quantity')} title="Check Item Quantity" color="#a10022"/>
+        <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Add New Item')} title="Add New Item" color="#a10022"/>
         <StatusBar style="auto" />
       </View>

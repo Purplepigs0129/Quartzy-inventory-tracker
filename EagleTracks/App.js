@@ -15,6 +15,7 @@ import NewItemPage from './components/NewItemPage.js';
 import ReturnPage from './components/ReturnPage.js';
 import WorkPage from './components/WorkPage.js';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import CheckPage from './components/CheckStockPage.js'
 
 //Initialization*****************************************************************
 
@@ -103,6 +104,9 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name = "Success Page">
         {(props)=><FinishPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Check Quantity">
+        {(props)=><CheckPage {...props} style={styles}/>}
         </Stack.Screen>
 
       </Stack.Navigator>
