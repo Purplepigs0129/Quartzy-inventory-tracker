@@ -6,21 +6,23 @@ import login from './loginCred.json'
 //Get All**********************************************************************************
 
 async function getAll(){
-    const url = 'https://api.quartzy.com/inventory-items';
-  
+    
+    
+    const url = "https://api.quartzy.com/inventory-items";
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
             'Access-Token': login['accessToken'],
+            'Content-Type': 'application/json',
         },
         
     });
-  
+
     const text = await response.text();
-    response.json().then(json => {console.log(json)})
-    console.log(text);
+    //response.json().then(json => {console.log(json)})
+    console.log(text)
   }
-//
+//check files*************************************************
 
 const checkFiles = (serial) => {
     if(itemList.hasOwnProperty(login['labID'])){
@@ -35,7 +37,7 @@ const checkFiles = (serial) => {
       }
   }
 
-//Check Batch
+//Check Batch**************************************************
 
   async function checkBatch(formValues, navigation){
     const nav = true;
