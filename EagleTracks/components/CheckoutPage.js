@@ -16,6 +16,7 @@ const CheckoutPage = ({navigation, style}) => {
     const [itemName, setItemName] = useState('');
   
     const checkDecrease = () => {
+      console.log("button pressed")
       if(!(numToDecr.trim())){
         alert('Number is empty');
       }else if(!(itemToDecr.trim())){
@@ -112,7 +113,7 @@ const CheckoutPage = ({navigation, style}) => {
         <Checkbox style={style.checkbox} value={toReturn} onValueChange={setToReturn} color={toReturn ? '00ff00' : '#000000'}/>
         
         
-        <Button style={style.buttonStyle} onPressitemListstyle={() => checkDecrease()} title="Submit" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#a10022" />
         {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
         {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
       <StatusBar style="auto" />
