@@ -57,6 +57,26 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     margin: 8,
+  },
+  removeButtonStyle: {
+    alignItems: "center",
+    paddingVertical: 3,
+    paddingHorizontal: 0,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "#a10022",
+    width: "30%",
+  },
+  removeButtonHolder:{
+    alignItems: 'flex-end',
+    width: '92%',
+  },
+  itemInList: {
+    borderWidth: 1,
+    borderColor: "#808080",
+  },
+  dropDown: {
+    zIndex: 100
   }
 });
 

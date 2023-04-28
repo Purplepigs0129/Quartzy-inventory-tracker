@@ -70,9 +70,9 @@ const checkFiles = (serial) => {
         const quant = quantResp['quantity']
         
         if(parseInt(formValues[i].numNeeded) <= quant){
-            str = `You have enough of ${formValues[i].itemToCheck} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
+            str = `You have enough of ${formValues[i].itemNameHolder} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
         }else{
-            str = `You do not have enough of ${formValues[i].itemToCheck} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
+            str = `You do not have enough of ${formValues[i].itemNameHolder} (Amount needed = ${formValues[i].numNeeded}, Amount owned = ${quant})`
         }
         formValues[i].resp = str;
         console.log(formValues[i].resp)
