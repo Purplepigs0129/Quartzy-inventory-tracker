@@ -31,6 +31,9 @@ const ReturnPage = ({navigation, style}) => {
                 testRun = false
                 alert(`Item ${i + 1} is not filled in`)
                 break
+            } else if(formValues[i].itemToCheck == 'Placeholder'){
+              testRun = false
+              alert(`Item ${i + 1} was left on placeholder`)
             } else if(!(formValues[i].numNeeded.trim())){
                 testRun = false
                 alert(`Amount needed for ${i + 1} is not filled in`)
@@ -44,6 +47,7 @@ const ReturnPage = ({navigation, style}) => {
               const _formValues = [...formValues]
               _formValues[i].itemNameHolder = _formValues[i].itemToCheck
               _formValues[i].itemToCheck = temp;
+              console.log(_formValues[i].itemToCheck)
               //console.log(text)
               setFormValues(_formValues)
             } else {
