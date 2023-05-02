@@ -9,7 +9,7 @@ import {Picker} from '@react-native-picker/picker'
 
 const ReturnPage = ({navigation, style}) => {
     
-    const [formValues, setFormValues] = useState([{ itemToCheck: "", numNeeded: "", resp: "", itemNameHolder: ""}]);
+    const [formValues, setFormValues] = useState([{ itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}]);
     const pickerData = itemNamesList[login["labID"]]
     const pickerList = []
     pickerList.push("Placeholder")
@@ -85,7 +85,7 @@ const ReturnPage = ({navigation, style}) => {
     }
     
     let addFormFields = () => {
-        setFormValues([...formValues, { itemToCheck: "", numNeeded: "" }])
+        setFormValues([...formValues, { itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}])
       }
     
     let removeFormFields = (i) => {

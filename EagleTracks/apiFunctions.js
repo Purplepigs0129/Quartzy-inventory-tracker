@@ -121,14 +121,17 @@ const checkFiles = (serial) => {
     }else if(status == '401'){
         alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
         console.log("logged unauthorized in quantity")
+        throw error
         return "NaN"
     }else if(status == '404'){
         alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
         console.log("logged not found in quantity")
+        throw error
         return "NaN"
     }else{
         alert('Unknown Error')
         console.log("logged unknown error in quantity")
+        throw error
         return "NaN"
         
     }
@@ -166,17 +169,20 @@ const checkFiles = (serial) => {
         response.json().then(json => {console.log(json)})
         console.log(text);
         if(status == '200'){
-            navigation.navigate('Success Page');
+            //navigation.navigate('Success Page');
         }else if(status == '401'){
             alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
             console.log("Logged unauthorized in incr")
+            throw error
             
         }else if(status == '404'){
             alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
             console.log("Logged item not found in incr")
+            throw error
         }else{
             alert('Unknown Error')
             console.log("Logged unknown error in incr")
+            throw error
         }
     }else{
         navigation.goBack();

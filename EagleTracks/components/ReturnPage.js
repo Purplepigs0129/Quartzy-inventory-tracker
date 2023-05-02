@@ -25,10 +25,21 @@ const ReturnPage = ({navigation, style}) => {
         if(!itemID.trim()){
           alert("ItemID not present, please add the item")
         }else{
-          API.incr(itemID, parseInt(numToIncr), true, navigation);
           navigation.navigate('Working Page');
+          apiCaller(itemID)
         }
       }
+    }
+
+    async function apiCaller(itemID){
+      requests = []
+      requests.push(API.incr(itemID, parseInt(numToIncr), true, navigation))
+      Promise.all(requests).then(() => {
+        navigation.navigate('Success Page');
+      }).catch((error) => {
+        console.log("error has ocurred")
+        navigation.goBack();
+      })
     }
     
     return(
