@@ -71,7 +71,7 @@ const CheckoutPage = ({navigation, style}) => {
       for (let i = 0; i < formValues.length; i++){
         requests.push(API.incr(formValues[i].itemToCheck, parseInt(formValues[i].numNeeded), false, navigation))
       }
-      Promise.all(requests).then(() => {
+      await Promise.all(requests).then(() => {
         navigation.navigate('Success Page');
       }).catch((error) => {
         console.log("error")

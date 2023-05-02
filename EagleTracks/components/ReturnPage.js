@@ -34,7 +34,7 @@ const ReturnPage = ({navigation, style}) => {
     async function apiCaller(itemID){
       requests = []
       requests.push(API.incr(itemID, parseInt(numToIncr), true, navigation))
-      Promise.all(requests).then(() => {
+      await Promise.all(requests).then(() => {
         navigation.navigate('Success Page');
       }).catch((error) => {
         console.log("error has ocurred")
