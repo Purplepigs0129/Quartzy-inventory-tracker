@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import itemList from './itemList.json'
+import itemNameList from './nameToSerial.json'
 import login from './loginCred.json'
 
 //Get All**********************************************************************************
@@ -22,6 +23,40 @@ async function getAll(){
     //response.json().then(json => {console.log(json)})
     console.log(text)
   }
+
+  //Update List****************************************************
+
+  async function updateAll(navigation){
+    
+    const url = "https://api.quartzy.com/inventory-items";
+    const response = await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Access-Token': login['accessToken'],
+            'Content-Type': 'application/json',
+        },
+        
+    });
+
+    const array = await response.json();
+
+    for(let i = 0; i < array.length; i++){
+        if(!(itemList[login['labID']].hasOwnProperty(array[i]['technical_details']))){
+            itemList[login['labID']][array[i]['technical_details']] = array[i]['id']
+            itemNameList[login['labID']][array[i]['name']] = array[i]['technical_details']
+        }else{
+            console.log(array[i]['name'])
+            console.log(array[i]['technical_details'])
+            console.log(array[i]['id'])
+        }
+
+        navigation.navigate('Success Page')
+    }
+
+    //response.json().then(json => {console.log(json)})
+    }
+
+
 //check files*************************************************
 
 const checkFiles = (serial) => {
@@ -190,4 +225,4 @@ const checkFiles = (serial) => {
   
   }
 
-  export {checkFiles, getAll, checkBatch, getQuantity, incr};
+  export {checkFiles, getAll, checkBatch, getQuantity, incr, updateAll};
