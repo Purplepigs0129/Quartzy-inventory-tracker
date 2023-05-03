@@ -44,10 +44,6 @@ async function getAll(){
         if(!(itemList[login['labID']].hasOwnProperty(array[i]['technical_details']))){
             itemList[login['labID']][array[i]['technical_details']] = array[i]['id']
             itemNameList[login['labID']][array[i]['name']] = array[i]['technical_details']
-        }else{
-            console.log(array[i]['name'])
-            console.log(array[i]['technical_details'])
-            console.log(array[i]['id'])
         }
 
         navigation.navigate('Success Page')
