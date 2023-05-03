@@ -21,19 +21,18 @@ const CheckoutPage = ({navigation, style}) => {
       console.log("button pressed")
       if(!(studentName.trim())){
         testRun = false
-        alert('Item is empty');
+        alert('Group/Name is empty');
       }else if(!(instName.trim())){
         testRun = false
-        alert('Item is empty');
+        alert('Instructor is empty');
       }else if(!(roomNum.trim())){
         testRun = false
-        alert('Item is empty');
+        alert('Destination room number is empty');
       }else if(!(className.trim())){
         testRun = false
-        alert('Item is empty');
+        alert('Class name is empty');
       }
       for (let i = 0; i < formValues.length; i++){
-        //console.log(formValues[i].itemToCheck)
         if(!(formValues[i].itemToCheck.trim())){
             testRun = false
             alert(`Item ${i + 1} is not filled in`)
