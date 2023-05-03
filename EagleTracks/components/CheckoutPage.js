@@ -11,9 +11,13 @@ const CheckoutPage = ({navigation, style}) => {
     const [instName, setInstName] = useState('');
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
-    const [toReturn, setToReturn] = useState(false);
 
     const itemList = labList[login['labID']]
+
+    const serialToName = []
+    for(var i in itemList){
+      serialToName.push([itemList[i], i])
+    }
     
   
     const checkDecrease = () => {
@@ -50,6 +54,11 @@ const CheckoutPage = ({navigation, style}) => {
           alert(`Item ${i + 1}'s name is blank`)
         } else if(itemList.hasOwnProperty(formValues[i].itemToCheck)){
           const _formValues = [...formValues]
+          for(let j = 0; j < serialToName.length; j++){
+            if(serialToName[j][0] == _formValues[i].itemToCheck){
+              _formValues[i].itemName = serialToName[j][1]
+            }
+          }
           _formValues[i].itemToCheck = itemList[formValues[i].itemToCheck];
           setFormValues(_formValues)
           console.log(formValues[i].itemToCheck)
@@ -78,13 +87,13 @@ const CheckoutPage = ({navigation, style}) => {
       })
     }
 
-    let handleChangeName = (text, index) => {
+    /*let handleChangeName = (text, index) => {
 
       const _formValues = [...formValues]
       _formValues[index].itemName = text;
       console.log(text)
       setFormValues(_formValues)
-    }
+    }*/
 
     let handleChangeItem = (text, index) => {
 
@@ -157,11 +166,10 @@ const CheckoutPage = ({navigation, style}) => {
           {formValues.map((element, index) => (
             <View key={index} style={style.itemInList}>
                 <Text></Text>
-              <Text>Item Name</Text>
+              {/*<Text>Item Name</Text>
               <View>
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeName(text, index)} />
-              {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
-              </View>
+              </View>*/}
               <Text>Item ID</Text>
               <View>
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />
