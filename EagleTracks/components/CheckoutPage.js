@@ -5,9 +5,12 @@ import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from
 import * as API from '../apiFunctions.js'
 import labList from '../itemList.json'
 import login from '../loginCred.json'
+import * as dbFunctions from "../dbFunctions.js"
+
 const CheckoutPage = ({navigation, style}) => {
-    const [formValues, setFormValues] = useState([{ itemToCheck: "", numNeeded: "", resp: "", itemName: "", willReturn: false}]);
+    const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
     const [studentName, setStudentName] = useState('');
+    const [studentEmail, setStudentEmail] = useState('');
     const [instName, setInstName] = useState('');
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
@@ -49,9 +52,6 @@ const CheckoutPage = ({navigation, style}) => {
             testRun = false
             alert(`Amount needed for item ${i + 1} is not a number`)
             break
-        } else if(!(formValues[i].itemName.trim())){
-          testRun = false
-          alert(`Item ${i + 1}'s name is blank`)
         } else if(itemList.hasOwnProperty(formValues[i].itemToCheck)){
           const _formValues = [...formValues]
           for(let j = 0; j < serialToName.length; j++){
@@ -59,10 +59,10 @@ const CheckoutPage = ({navigation, style}) => {
               _formValues[i].itemName = serialToName[j][1]
             }
           }
-          _formValues[i].itemToCheck = itemList[formValues[i].itemToCheck];
+          _formValues[i].itemID = itemList[formValues[i].itemToCheck];
           setFormValues(_formValues)
-          console.log(formValues[i].itemToCheck)
-        } else if(!itemList.hasOwnProperty(formValues[i].itemToCheck)){
+          console.log(formValues[i].itemID)
+        } else if(!itemList.hasOwnProperty(formValues[i].itemID)){
           testRun = false
           console.log("Item list did not contain item")
         }
@@ -74,15 +74,21 @@ const CheckoutPage = ({navigation, style}) => {
       }
     }
 
+    async function dbCaller(){
+      await Promise(dbFunctions.handleCheckout(studentName, instName, className, roomNum, studentEmail, formValues, navigation)).then(() => {
+        
+      }).catch((error) => console.log("error ocurred in database"))
+    }
+
     async function apiCaller(){
       requests = []
       for (let i = 0; i < formValues.length; i++){
-        requests.push(API.incr(formValues[i].itemToCheck, parseInt(formValues[i].numNeeded), false, navigation))
+        requests.push(API.incr(formValues[i].itemID, parseInt(formValues[i].numNeeded), false, navigation))
       }
       await Promise.all(requests).then(() => {
-        navigation.navigate('Success Page');
+        dbCaller()
       }).catch((error) => {
-        console.log("error")
+        console.log("error in checkout")
         navigation.goBack();
       })
     }
@@ -110,14 +116,9 @@ const CheckoutPage = ({navigation, style}) => {
       setFormValues(_formValues)
   }
 
-  let handleToReturn = (bool, index) => {
-    const _formValues = [...formValues]
-    _formValues[index].willReturn = bool
-    setFormValues(_formValues)
-  }
   
   let addFormFields = () => {
-      setFormValues([...formValues, { itemToCheck: "", numNeeded: "", resp: "", itemName: "", willReturn: false}])
+      setFormValues([...formValues, { itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}])
     }
   
   let removeFormFields = (i) => {
@@ -162,6 +163,14 @@ const CheckoutPage = ({navigation, style}) => {
             (value)=>setStudentName(value)
           }
         />
+        <Text style={style.textStyle}>StudentEmail:</Text>
+        <TextInput
+          style={style.input}
+          placeholder=" StudentEmail@ewu.edu"
+          onChangeText={
+            (value)=>setStudentEmail(value)
+          }
+        />
 
           {formValues.map((element, index) => (
             <View key={index} style={style.itemInList}>
@@ -178,10 +187,6 @@ const CheckoutPage = ({navigation, style}) => {
               <Text>Amount Needed</Text>
               <View>
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeAmount(text, index)} />
-              </View>
-              <Text>Will the item be returned?</Text>
-              <View>
-              <Checkbox style={style.checkbox} value={element.willReturn} onValueChange={bool => handleToReturn(bool, index)} color={element.willReturn ? '00ff00' : '#000000'}/>
               </View>
               {
                 index ? 

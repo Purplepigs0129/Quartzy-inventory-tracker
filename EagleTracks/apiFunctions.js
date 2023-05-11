@@ -118,30 +118,20 @@ const checkFiles = (serial) => {
 //Get Quantity************************************************************************
 
   async function getQuantity(itemID){
+    console.log("id in quantity:")
+    console.log(itemID)
     const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
             'Access-Token': login['accessToken'],
         },
-        
     });
   
     const resp = await response.json();
     //response.then(json => {console.log(json)})
     const status = response.status;
     console.log(resp);
-    /*
-    let body = text.replace("b'", '');
-    body = body.replace("[{", '');
-    let cont = body.split(",");
-    let quantity = cont[6];
-    quantity = quantity.replace('"', '');
-    quant = quantity.split(":");
-    itemQuant = quant[1].replace('"', '');
-    itemQuant = itemQuant.replace('"', '')
-    console.log(itemQuant);
-    */
     
     response.json().then(json => {console.log(json)})
     
@@ -153,20 +143,16 @@ const checkFiles = (serial) => {
         alert('Error 401: Request Unauthorized\nPlease reset your Access Token')
         console.log("logged unauthorized in quantity")
         throw error
-        return "NaN"
     }else if(status == '404'){
         alert('Error 404: Item Not Found\nPlease return to the home page and add the item')
         console.log("logged not found in quantity")
         throw error
-        return "NaN"
     }else{
         alert('Unknown Error')
         console.log("logged unknown error in quantity")
         throw error
-        return "NaN"
         
     }
-    
   }
   
 //Change Stock**********************************************************************************

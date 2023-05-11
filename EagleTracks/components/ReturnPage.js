@@ -4,6 +4,7 @@ import { Text, View, Button, TextInput} from 'react-native';
 import * as API from '../apiFunctions.js'
 import itemList from '../itemList.json'
 import login from '../loginCred.json'
+import * as db from '../dbFunctions.js'
 
 const ReturnPage = ({navigation, style}) => {
     const [numToIncr, setNumToIncr] = useState('');
@@ -35,12 +36,13 @@ const ReturnPage = ({navigation, style}) => {
       requests = []
       requests.push(API.incr(itemID, parseInt(numToIncr), true, navigation))
       await Promise.all(requests).then(() => {
-        navigation.navigate('Success Page');
+        navigation.navigate('Success Page')
       }).catch((error) => {
         console.log("error has ocurred")
         navigation.goBack();
       })
     }
+
     
     return(
       <View style={style.container}>
@@ -63,6 +65,15 @@ const ReturnPage = ({navigation, style}) => {
           keyboardType="numeric"
         />
         <Button style={style.buttonStyle} onPress={() => checkIncrease()} title="Submit" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.createTransactions()} title="Transactions" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.createReturns()} title="Transactions" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.createCheckouts()} title="Transactions" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.deleteTest()} title="Delete" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.handleCheckout('testName', 'testInstName', 'testClassName', 'testRoomNum', 'testStudentEmail', null)} title="Checkout" color="#a10022" />
+        
+        <Button style={style.buttonStyle} onPress={() => db.getCheckouts()} title="check checkouts" color="#a10022" />
+        <Button style={style.buttonStyle} onPress={() => db.getAll()} title="GetAll" color="#a10022" />
+
         {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true, navigation)} title="Increase by 5" color="#841584" />*/}
         {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
       <StatusBar style="auto" />

@@ -7,7 +7,9 @@ const HomePage = ({navigation, style}) => {
       <View style={style.container}>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Change Credentials')} title="Change Credentials" color="#a10022"/>
         <Text></Text>
-        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#a10022"/>
+        {/*<Button style={style.buttonStyle} onPress={() => navigation.navigate('Return Items')} title="Return Items" color="#a10022"/>
+        <Text></Text>*/}
+        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Get Order Number')} title="Process Return" color="#a10022"/>
         <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Checkout Items')} title="Checkout Items" color="#a10022"/>
         <Text></Text>
