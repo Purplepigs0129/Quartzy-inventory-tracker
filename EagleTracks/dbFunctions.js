@@ -117,6 +117,59 @@ async function getAllReturns(){
 
 //END GET ALL*********************************************************************************************
 
+//GET WHERE*********************************************************************************************
+
+async function getTransactionsWhere(str){
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM transactions WHERE '.concat(str),
+                (resp, result) => resolve(result.rows._array),
+                (resp, error) => reject(error),
+            );
+        });
+    });
+
+    promise.then((value) => {
+        console.log(value)
+        return value
+    }).catch((error) => console.log(error))
+}
+
+async function getCheckoutsWhere(str){
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM checkouts WHERE '.concat(str),
+                (resp, result) => resolve(result.rows._array),
+                (resp, error) => reject(error),
+            );
+        });
+    });
+
+    promise.then((value) => {
+        return value
+    }).catch((error) => console.log(error))
+}
+
+async function getReturnsWhere(str){
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM returns WHERE'.concat(str),
+                (resp, result) => resolve(result.rows._array),
+                (resp, error) => reject(error),
+            );
+        });
+    });
+
+    promise.then((value) => {
+        return value
+    }).catch((error) => console.log(error))
+}
+
+//END GET WHERE**********************************************************************************************
+
 //DELETE**************************************************************************************************
 
 async function deleteTest(){
