@@ -341,4 +341,4 @@ async function getReturns(orderNum, navigation){
 
 //END RETURNS*****************************************************************************************************
 
-export {createTransactions, createReturns, createCheckouts, getAll, deleteTest, handleCheckout, getReturns, getAllCheckouts, getAllReturns, updateCheckouts, insertReturn}
+export {createTransactions, createReturns, createCheckouts, getAll, deleteTest, handleCheckout, getReturns, getAllCheckouts, getAllReturns, updateCheckouts, insertReturn, getTransactionsWhere, getCheckoutsWhere, getReturnsWhere}
