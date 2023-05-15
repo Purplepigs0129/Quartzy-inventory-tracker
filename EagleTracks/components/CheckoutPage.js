@@ -104,7 +104,7 @@ const CheckoutPage = ({navigation, style}) => {
     let handleChangeItem = (text, index) => {
 
       const _formValues = [...formValues]
-      _formValues[index].itemToCheck = text;
+      _formValues[index].itemToCheck = text.toUpperCase();
       console.log(text)
       setFormValues(_formValues)
     }
