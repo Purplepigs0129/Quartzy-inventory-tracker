@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import { StyleSheet, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
@@ -14,7 +14,7 @@ import FinishPage from './components/FinishPage.js';
 import NewItemPage from './components/NewItemPage.js';
 import ReturnPage from './components/ReturnPage.js';
 import WorkPage from './components/WorkPage.js';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************
 
@@ -104,7 +104,9 @@ const App = () => {
         <Stack.Screen name = "Success Page">
         {(props)=><FinishPage {...props} style={styles}/>}
         </Stack.Screen>
-
+        <Stack.Screen name = "Barcode Page">
+        {(props)=><Barcode {...props} style={styles}/>}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
     //End Screens****************************************************************************************
@@ -113,27 +115,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Button onPress={() => API.getAll()} title="Get All" color="#841584" />
-      <Button onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#841584" />
-      <Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true)} title="Increase by 5" color="#841584" />
-      <Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false)} title="Decrease by 5" color="#841584" />
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-*/

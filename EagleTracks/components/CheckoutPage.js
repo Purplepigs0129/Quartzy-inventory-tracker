@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {Component, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
-import {ScrollView, Text, SafeAreaView, Button, TextInput} from 'react-native';
+import {ScrollView, Text, SafeAreaView, Button, TextInput, Pressable, TouchableHighlight} from 'react-native';
 import * as API from '../apiFunctions.js'
 import itemList from '../itemList.json'
 import login from '../loginCred.json'
+import { FontAwesome5 } from '@expo/vector-icons';
+
+
 const CheckoutPage = ({navigation, style}) => {
     const [numToDecr, setNumToDecr] = useState('');
     const [itemToDecr, setItemToDecr] = useState('');
@@ -97,8 +100,10 @@ const CheckoutPage = ({navigation, style}) => {
           onChangeText={
             (value)=>setItemToDecr(value)
           }
-          
         />
+        <Pressable>
+        <FontAwesome5 name="camera" size={24} color="black" onPress={() => navigation.navigate('Barcode Page')} />
+        </Pressable>
         <Text style={style.textStyle}>Number of items to be taken:</Text>
         <TextInput
           style={style.input}
