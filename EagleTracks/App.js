@@ -20,6 +20,7 @@ import CheckPage from './components/CheckStockPage.js'
 import GetOrderNumPage from './components/GetOrderNumPage.js'
 import MakeReturnPage from './components/MakeReturnPage.js'
 import CheckoutSuccessPage from './components/CheckoutSuccessPage.js'
+import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
 
 //Initialization*****************************************************************
 
@@ -102,6 +103,11 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 //End Increase Page*****************************************
 
 //@App***************************************************************************************
+
+createTransactions()
+createCheckouts()
+createReturns()
+
 const App = () => {
   return(
 
