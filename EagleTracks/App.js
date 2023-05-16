@@ -7,19 +7,19 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Should really look into cleaning up all the page imports.
 //Having each page in a separate feels great, though
-import HomePage from './components/HomePage.js'
-import CredPage from './components/CredPage.js'
-import CheckoutPage from './components/CheckoutPage.js'
-import FinishPage from './components/FinishPage.js';
-import NewItemPage from './components/NewItemPage.js';
-import ReturnPage from './components/ReturnPage.js';
-import WorkPage from './components/WorkPage.js';
-import ResultsPage from './components/ResultsPage.js';
+import HomePage from './pages/HomePage.js'
+import CredPage from './pages/CredPage.js'
+import CheckoutPage from './pages/CheckoutPage.js'
+import FinishPage from './pages/FinishPage.js';
+import NewItemPage from './pages/NewItemPage.js';
+import ReturnPage from './pages/ReturnPage.js';
+import WorkPage from './pages/WorkPage.js';
+import ResultsPage from './pages/ResultsPage.js';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import CheckPage from './components/CheckStockPage.js'
-import GetOrderNumPage from './components/GetOrderNumPage.js'
-import MakeReturnPage from './components/MakeReturnPage.js'
-import CheckoutSuccessPage from './components/CheckoutSuccessPage.js'
+import CheckPage from './pages/CheckStockPage.js'
+import GetOrderNumPage from './pages/GetOrderNumPage.js'
+import MakeReturnPage from './pages/MakeReturnPage.js'
+import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
 
 //Initialization*****************************************************************
