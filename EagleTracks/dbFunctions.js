@@ -277,7 +277,25 @@ async function handleCheckout(studentName, instName, className, roomNum, student
 //HANDLE RETURNS*************************************************************************************************
 
 function endReturnNavigator(navigation){
-    navigation.navigate('Success Page')
+    navigation.navigate('Success Page')//navigates to success page
+}
+
+async function updateReturnDate(orderNum, navigation){
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'UPDATE transactions SET DateOfReturn = ? WHERE orderNum = ?',
+                [String(Date()), orderNum],
+                resolve,
+                (_, error) => reject(error),
+            );
+        });
+    });
+    promise.then((value) => {
+        endReturnNavigator(navigation)
+    }).catch((error) => {
+        console.log(error)
+    })
 }
 
 async function updateCheckouts(orderNum, navigation) {
@@ -292,7 +310,7 @@ async function updateCheckouts(orderNum, navigation) {
         });
     });
     promise.then((value) => {
-        endReturnNavigator(navigation)
+        updateReturnDate(orderNum, navigation)
     }).catch((error) => {
         console.log(error)
     })
@@ -333,7 +351,7 @@ async function getReturns(orderNum, navigation){
     promise.then((value) => {
         console.log("Got Return")
         console.log(value)
-        navigator(value, navigation)
+        navigator(value, navigation)//navigates to return page
     }).catch((error) => {
         console.log(error)
     })
