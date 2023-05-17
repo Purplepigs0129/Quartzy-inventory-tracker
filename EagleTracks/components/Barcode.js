@@ -38,7 +38,7 @@ return (
     <View style={styles.contianer}>
     <BarCodeScanner 
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={ {height: 400, width: 400 }}
+        style={ {height: 600, width: 400 }}
     />
     {scanned && <Button title='Scan again' onPress={() => setScanned(false)}/>}
     </View>
