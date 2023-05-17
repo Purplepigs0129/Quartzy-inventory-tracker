@@ -10,7 +10,7 @@ const Barcode = (navigation, props) => {
     useEffect(() => {
       (async() => {
           const { status } = await BarCodeScanner.requestPermissionsAsync();
-          setHasPermission(status == 'granted');
+          setHasPermission(status === 'granted');
       })();
     }, []);
 
@@ -24,7 +24,7 @@ const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
     const array = data.split("-");
     data = array[1];
-    alert('BarCode: ', data);
+    alert(`BarCode: ${data}`);
 };
 
 if (hasPermission == null) {
@@ -38,7 +38,7 @@ return (
     <View style={styles.contianer}>
     <BarCodeScanner 
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style = {StyleSheet.absoluteFillObject}
+        style={ {height: 400, width: 400 }}
     />
     {scanned && <Button title='Scan again' onPress={() => setScanned(false)}/>}
     </View>
@@ -50,5 +50,6 @@ const styles = StyleSheet.create ({
     container: 1,
         flex:1,
         flexDirection:'column',
-        justifyContent: 'center'
-})
+        justifyContent: 'center',
+        
+    })

@@ -11,17 +11,17 @@
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
     "@react-navigation/native-stack": "^6.9.12",
-    "expo": "~48.0.9",
-    "expo-barcode-scanner": "^12.3.2",
+    "expo": "^48.0.0",
+    "expo-barcode-scanner": "~12.3.2",
     "expo-checkbox": "~2.3.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.71.7",
+    "react-native": "0.71.8",
     "react-native-fs": "^2.20.0",
     "react-native-ico-material-design": "^3.3.1",
-    "react-native-svg": "^13.4.0",
-    "react-native-web": "~0.18.10"
+    "react-native-svg": "13.4.0",
+    "react-native-web": "~0.18.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
