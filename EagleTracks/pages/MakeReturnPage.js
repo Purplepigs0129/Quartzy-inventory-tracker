@@ -150,8 +150,6 @@ const MakeReturnPage = ({route, navigation, style}) => {
               <Text>Item Serial:</Text>
               <View>
                 <Text>{ formValues[index].ItemSerial }</Text>
-              {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
-              {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               </View>
               <Text>Amount To Return</Text>
               <View>
@@ -171,8 +169,6 @@ const MakeReturnPage = ({route, navigation, style}) => {
       )
   }
 
-  //Duplicate function w/ Return Page.
-  
 
   export default MakeReturnPage;
 

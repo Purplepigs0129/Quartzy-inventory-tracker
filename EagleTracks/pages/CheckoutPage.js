@@ -44,16 +44,7 @@ const CheckoutPage = ({navigation, style}) => {
             testRun = false
             alert(`Amount needed for item ${i + 1} is not a number`)
             break
-        }/*else if(itemList.hasOwnProperty(formValues[i].itemToCheck)){
-          const _formValues = [...formValues]
-          
-          _formValues[i].itemID = itemList[formValues[i].itemToCheck];
-          setFormValues(_formValues)
-          console.log(formValues[i].itemID)
-        } else if(!itemList.hasOwnProperty(formValues[i].itemID)){
-          testRun = false
-          console.log("Item list did not contain item")
-        }*/
+        }
       }
       console.log("comp")
       if(testRun){
@@ -110,14 +101,6 @@ const CheckoutPage = ({navigation, style}) => {
         navigation.goBack();
       })
     }
-
-    /*let handleChangeName = (text, index) => {
-
-      const _formValues = [...formValues]
-      _formValues[index].itemName = text;
-      console.log(text)
-      setFormValues(_formValues)
-    }*/
 
     let handleChangeItem = (text, index) => {
 
