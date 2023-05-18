@@ -1,19 +1,22 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import itemList from './itemList.json'
-import itemNameList from './nameToSerial.json'
-import login from './loginCred.json'
+//import itemList from './itemList.json'
+//import itemNameList from './nameToSerial.json'
+//import login from './loginCred.json'
+import * as itemDB from './itemDB'
+import * as secureStore from "./SecureStore"
 
 //Get All**********************************************************************************
 
 async function getAll(){
     
+    var accessToken = await secureStore.getValueFor('AccessToken')
     
     const url = "https://api.quartzy.com/inventory-items";
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
-            'Access-Token': login['accessToken'],
+            'Access-Token': accessToken,
             'Content-Type': 'application/json',
         },
         
@@ -27,75 +30,94 @@ async function getAll(){
   //Update List****************************************************
 
   async function updateAll(navigation){
+    var accessToken = await secureStore.getValueFor('AccessToken')
     
     const url = "https://api.quartzy.com/inventory-items";
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
-            'Access-Token': login['accessToken'],
+            'Access-Token': accessToken,
             'Content-Type': 'application/json',
         },
         
     });
 
     const array = await response.json();
-
-    for(let i = 0; i < array.length; i++){
-        if(!(itemList[login['labID']].hasOwnProperty(array[i]['technical_details']))){
-            itemList[login['labID']][array[i]['technical_details']] = array[i]['id']
-            itemNameList[login['labID']][array[i]['name']] = array[i]['technical_details']
-        }
-
-        navigation.navigate('Success Page')
+    console.log("Array: ")
+    console.log(array)
+    if(array.length == 0){
+        alert("Quartzy database returned no items (they're probably down again)")
     }
+    //code bellow is for testing
+    /*const json1 = JSON.parse('{"technical_details": "A00002",  "name": "Beaker plastic 50ml", "id": "945eadcc-319a-4c21-89f2-1901defd742e"}')
+    const json2 = JSON.parse('{"technical_details": "A00004", "name": "testing test item", "id": "3159a2a3-0cf6-41e4-b42a-1ce179d412d4"}')
+    newArray = [json1, json2]
+    console.log(newArray)*/
+    console.log("Entering for loop")
+    requests = []
+    for(let i = 0; i < array.length; i++){
+        var result = await itemDB.getQuartzyItemSerial(array[i]['technical_details'])
+        console.log(result)
+        if(result.length == 0){
+            console.log("Insert new data")
+            itemDB.quartzyTableInsert(array[i]['technical_details'], array[i]['name'], array[i]['id'])
+        }
+    }
+
+    /*await Promise.all(requests).then((response) => {
+        console.log("Promised")
+        console.log(response)
+    }).catch(error => {
+        console.log(error)
+    })*/
+
+    navigation.navigate('Success Page')
 
     //response.json().then(json => {console.log(json)})
     }
 
 
-//check files*************************************************
-
-const checkFiles = (serial) => {
-    if(itemList.hasOwnProperty(login['labID'])){
-        let temp = itemList[login['labID']]
-        if(temp.hasOwnProperty(serial)){
-          return temp[serial]
-        }else{
-          return ''
-        }
-      }else{
-        return ''
-      }
-  }
-
 //Check Batch**************************************************
 
   async function checkBatch(formValues, navigation){
-    const nav = true;
+    var nav = true;
+    var accessToken = await secureStore.getValueFor('AccessToken')
+    
     for (let i = 0; i < formValues.length; i++){
         console.log(formValues[i].itemToCheck)
-        const itemID = checkFiles(formValues[i].itemToCheck)
+        itemID = formValues[i].itemToCheck
         if(!(itemID.trim())){
             alert(`Item ${i} is not present in item list, please update item list`)
             nav = false
             break
         }
+        console.log('checkID')
+        console.log(itemID)
 
         const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
         const response = await fetch(url, {
             headers: {
                 'Accept': 'application/json',
-                'Access-Token': login['accessToken'],
+                'Access-Token': accessToken,
             },
             
         });
   
         const quantResp = await response.json();
+
+        console.log("Response Status: ")
+        console.log(response.status)
         
         if(response.status != '200'){
-            alert(`Error in handling of item ${i + 1}.  Please notify your instructor`)
-            nav = false
-            break
+            if(response.status == '404'){
+                alert(`Error in handling of item ${i + 1}.  Quartzy database may be down or the item was not stored correctly.`)
+                nav = false
+                break
+            }else{
+                alert(`Error in handling of item ${i + 1}.  ${response.status}  Please notify your instructor`)
+                nav = false
+                break
+            }
         }
         
         const quant = quantResp['quantity']
@@ -112,19 +134,23 @@ const checkFiles = (serial) => {
     //navigation.navigate('Results Page')
     if(nav){
         navigation.navigate('Results Page', {formValues})
+    }else{
+        navigation.goBack()
     }
   }
 
 //Get Quantity************************************************************************
 
   async function getQuantity(itemID){
+    var accessToken = await secureStore.getValueFor('AccessToken')
+    
     console.log("id in quantity:")
     console.log(itemID)
     const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
     const response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
-            'Access-Token': login['accessToken'],
+            'Access-Token': accessToken,
         },
     });
   
@@ -158,6 +184,7 @@ const checkFiles = (serial) => {
 //Change Stock**********************************************************************************
 
   async function incr(itemID, numIncr, incr, navigation){
+    var accessToken = await secureStore.getValueFor('AccessToken')
     
     let curQuant = await getQuantity(itemID);
     if (curQuant != "NaN"){
@@ -174,7 +201,7 @@ const checkFiles = (serial) => {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
-                'Access-Token': login['accessToken'],
+                'Access-Token': accessToken,
                 'Content-Type': 'application/json',
             },
             body: data,
@@ -207,4 +234,4 @@ const checkFiles = (serial) => {
   
   }
 
-  export {checkFiles, getAll, checkBatch, getQuantity, incr, updateAll};
+  export {getAll, checkBatch, getQuantity, incr, updateAll};

@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import {Text, View, Button, TextInput} from 'react-native';
-import login from '../loginCred.json'
+import * as SecureStore from '../SecureStore'
+
 const CredPage = ({navigation, style}) => {
     const [newAccess, setAccess] = useState('');
     const [newLab, setLab] = useState('');
@@ -11,13 +12,29 @@ const CredPage = ({navigation, style}) => {
       }else if(!(newLab.trim())){
         alert('Lab ID is empty');
       }else{
-        login['accessToken'] = newAccess
-        login['labID'] = newLab
-        console.log(login['accessToken'])
-        console.log(login['labID'])
-        navigation.navigate('Success Page');
+        navigation.navigate('Working Page');
+        credChanger();
       }
     }
+
+    async function credChanger(){
+
+      requests = []
+      requests.push(SecureStore.save('AccessToken', newAccess));
+      requests.push(SecureStore.save('LabID', newLab))
+
+      await Promise.all(requests).then(() => {
+        navigation.navigate('Success Page')
+      }).catch((error) => {
+        console.log("error in saving credentials")
+        console.log(error)
+        alert("Error when saving credentials")
+        navigation.goBack();
+      })
+
+    }
+
+
     return(
       <View style={style.container}>
         <Text style={style.textStyle}>Access Token:</Text>

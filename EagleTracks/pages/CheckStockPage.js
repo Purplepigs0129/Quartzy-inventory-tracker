@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import * as API from '../apiFunctions.js'
@@ -6,23 +6,44 @@ import itemList from '../itemList.json'
 import login from '../loginCred.json'
 import itemNamesList from '../nameToSerial.json'
 import {Picker} from '@react-native-picker/picker'
+import * as itemDB from '../itemDB'
 
 const ReturnPage = ({navigation, style}) => {
     
     const [formValues, setFormValues] = useState([{ itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}]);
-    const pickerData = itemNamesList[login["labID"]]
-    const pickerList = []
-    pickerList.push("Placeholder")
-    for (var i in pickerData){
-      pickerList.push(i)
-    }
-    console.log(pickerList)
-    //console.log(pickerData)
+    //const pickerData = itemNamesList[login["labID"]]
+    const [pickerList, setPickerList] = useState([])
+    const [emptyLoad, setEmptyLoad] = useState(true)
     
+    
+    //console.log(pickerData)
 
+    function insertValue(value){
+      console.log('Value')
+      console.log(value)
+      const _pickerList = [...pickerList]
+      for(let i = 0; i < value.length; i ++){
+        _pickerList.push(value[i]['ItemName'])
+      }
+      setPickerList(_pickerList)
+    }
+
+    async function updatePicker(){
+      var value = await itemDB.getAllPromise()
+      console.log(value)
+      insertValue(value)
+    }
+    
+    useEffect(() => {
+      console.log(emptyLoad)
+      if(emptyLoad){
+        updatePicker()
+        setEmptyLoad(false)
+      }
+    }, [])
+      
     
     const checkFields = () => {
-        console.log(pickerData)
         let testRun = true
         console.log(formValues)
         for (let i = 0; i < formValues.length; i++){
@@ -42,30 +63,51 @@ const ReturnPage = ({navigation, style}) => {
                 testRun = false
                 alert(`Amount needed for item ${i + 1} is not a number`)
                 break
-            } else if(pickerData.hasOwnProperty(formValues[i].itemToCheck)){
-              temp = pickerData[formValues[i].itemToCheck]
-              const _formValues = [...formValues]
-              _formValues[i].itemNameHolder = _formValues[i].itemToCheck
-              _formValues[i].itemToCheck = temp;
-              console.log(_formValues[i].itemToCheck)
-              //console.log(text)
-              setFormValues(_formValues)
-            } else {
-              testRun = false
-              alert(`item ${i} not found`)
             }
         }
 
-        if(!(login['accessToken'])){
-            testRun = false
-            alert('Missing access token.  Please enter your access token.')
-            navigation.navigate("Change Credentials")
-        }
 
         if(testRun){
-            API.checkBatch(formValues, navigation);
-            navigation.navigate('Working Page')
+          handleFunctions()
+          //API.checkBatch(formValues, navigation);
+          navigation.navigate('Working Page')
         }
+    }
+    
+
+    async function handleFunctions(){
+      await updateFormValues().then(() => {
+        API.checkBatch(formValues, navigation)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+
+    async function updateFormValues(){
+      for (let i = 0; i < formValues.length; i++){
+        await getItem(formValues[i].itemToCheck).then((value) => {
+          console.log("in update")
+          console.log(value)
+
+          const _formValues = [...formValues]
+          _formValues[i].itemToCheck = value['ItemID'];
+          _formValues[i].itemNameHolder = value['ItemName']
+          setFormValues(_formValues)
+          console.log(formValues[i].itemNameHolder)
+          console.log(formValues[i].itemToCheck)
+
+        }).catch(error => {
+          console.log(error)
+        })
+      }
+      
+    }
+
+    async function getItem(itemName){
+      var value = await (itemDB.getQuartzyItemName(String(itemName)))
+      console.log("GetItemData")
+      console.log(value)
+      return value[0]
     }
     
 

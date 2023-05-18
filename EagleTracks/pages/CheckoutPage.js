@@ -3,9 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import * as API from '../apiFunctions.js'
-import labList from '../itemList.json'
-import login from '../loginCred.json'
 import * as dbFunctions from "../dbFunctions.js"
+import * as itemDB from "../itemDB.js"
 
 const CheckoutPage = ({navigation, style}) => {
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
@@ -15,13 +14,6 @@ const CheckoutPage = ({navigation, style}) => {
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
 
-    const itemList = labList[login['labID']]
-
-    const serialToName = []
-    for(var i in itemList){
-      serialToName.push([itemList[i], i])
-    }
-    
   
     const checkDecrease = () => {
       let testRun = true
@@ -52,26 +44,53 @@ const CheckoutPage = ({navigation, style}) => {
             testRun = false
             alert(`Amount needed for item ${i + 1} is not a number`)
             break
-        } else if(itemList.hasOwnProperty(formValues[i].itemToCheck)){
+        }/*else if(itemList.hasOwnProperty(formValues[i].itemToCheck)){
           const _formValues = [...formValues]
-          for(let j = 0; j < serialToName.length; j++){
-            if(serialToName[j][0] == _formValues[i].itemToCheck){
-              _formValues[i].itemName = serialToName[j][1]
-            }
-          }
+          
           _formValues[i].itemID = itemList[formValues[i].itemToCheck];
           setFormValues(_formValues)
           console.log(formValues[i].itemID)
         } else if(!itemList.hasOwnProperty(formValues[i].itemID)){
           testRun = false
           console.log("Item list did not contain item")
-        }
+        }*/
       }
       console.log("comp")
       if(testRun){
         navigation.navigate('Working Page');
+        updateFormValues()
+      }
+    }
+
+    async function updateFormValues(){
+      let success = true
+      for (let i = 0; i < formValues.length; i++){
+        await getItemID(formValues[i].itemToCheck).then((results) => {
+          console.log("in update")
+          console.log(results)
+
+          const _formValues = [...formValues]
+          _formValues[i].itemID = results['ItemID'];
+          setFormValues(_formValues)
+          console.log(formValues[i].itemID)
+
+        }).catch(error => {
+          console.log(error)
+          success = false
+          alert(`Item ${i + 1} not retrieved from database, please update the database list`)
+        })
+      }
+      success = false
+      if(success){
         apiCaller()
       }
+    }
+
+    async function getItemID(itemSerial){
+      var value = await (itemDB.getQuartzyItemSerial(String(itemSerial)))
+      console.log("GetItemID")
+      console.log(value)
+      return value[0]
     }
 
     async function dbCaller(){
@@ -229,27 +248,6 @@ const CheckoutPage = ({navigation, style}) => {
       )
   }
 
-  //Duplicate function w/ Return Page.
-  function checkFiles(serial){
-    //const itemData = require("./itemList.json")
-    //console.log("in function")//test code
-    if(itemList.hasOwnProperty(login['labID'])){
-      let temp = itemList[login['labID']]
-      if(temp.hasOwnProperty(serial)){
-        return temp[serial]
-      }else{
-        return ''
-      }
-    }else{
-      return ''
-    }
-    //return itemList[serial]
-    /*if(serial == "A00002"){
-        return "945eadcc-319a-4c21-89f2-1901defd742e"
-    }*/
-    
-    
-  }
 
   export default CheckoutPage;
 

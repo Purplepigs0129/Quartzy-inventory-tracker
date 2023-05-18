@@ -21,6 +21,7 @@ import GetOrderNumPage from './pages/GetOrderNumPage.js'
 import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
+import { createQuartzyTable } from './itemDB.js';
 
 //Initialization*****************************************************************
 
@@ -107,6 +108,7 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 createTransactions()
 createCheckouts()
 createReturns()
+createQuartzyTable()
 
 const App = () => {
   return(
