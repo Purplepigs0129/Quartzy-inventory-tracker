@@ -1,8 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-//import itemList from './itemList.json'
-//import itemNameList from './nameToSerial.json'
-//import login from './loginCred.json'
 import * as itemDB from './itemDB'
 import * as secureStore from "./SecureStore"
 
