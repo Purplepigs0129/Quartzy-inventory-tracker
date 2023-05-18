@@ -1,11 +1,7 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import Checkbox from 'expo-checkbox'
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import * as API from '../apiFunctions.js'
-import labList from '../itemList.json'
-import nameToSerialJSON from '../nameToSerial.json'
-import login from '../loginCred.json'
 import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from '../itemDB.js'
 
