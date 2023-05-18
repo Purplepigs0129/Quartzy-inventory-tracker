@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite'
-import login from './loginCred.json'
+import * as secureStore from "./SecureStore"
 
 const db = SQLite.openDatabase('quartzy-test3.db')
 
@@ -76,7 +76,6 @@ async function getAll(){
 
     promise.then((value) => {
         console.log(value)//all
-        console.log(value[0]['OrderNum'])//specific
         return value
     })
 }
@@ -94,6 +93,7 @@ async function getAllCheckouts(){
     });
 
     promise.then((value) => {
+        console.log(value)
         return value
     })
 }
@@ -256,11 +256,12 @@ async function getMaxID(formValues, navigation){
 }
 
 async function handleCheckout(studentName, instName, className, roomNum, studentEmail, formValues, navigation){
+    var labID = await secureStore.getValueFor('LabID')
     promise = new Promise((resolve, reject) => {
         db.transaction((tx) => {
             tx.executeSql(
                 `INSERT INTO transactions (LabID, ProfName, ClassName, RoomNum, StudentName, StudentEmail, DateOfTransaction) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [login['labID'], instName, className, roomNum, studentName, studentEmail, String(Date())],
+                [labID, instName, className, roomNum, studentName, studentEmail, String(Date())],
                 (resp, result) => resolve(result.insertId),
                 (resp, error) => reject(error),
             );

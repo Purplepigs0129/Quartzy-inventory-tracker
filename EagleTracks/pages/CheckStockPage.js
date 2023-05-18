@@ -2,16 +2,12 @@ import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import * as API from '../apiFunctions.js'
-import itemList from '../itemList.json'
-import login from '../loginCred.json'
-import itemNamesList from '../nameToSerial.json'
 import {Picker} from '@react-native-picker/picker'
 import * as itemDB from '../itemDB'
 
 const ReturnPage = ({navigation, style}) => {
     
     const [formValues, setFormValues] = useState([{ itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}]);
-    //const pickerData = itemNamesList[login["labID"]]
     const [pickerList, setPickerList] = useState([])
     const [emptyLoad, setEmptyLoad] = useState(true)
     
@@ -183,26 +179,5 @@ const ReturnPage = ({navigation, style}) => {
     )
 
 }
-
-  function checkFiles(serial){
-    //const itemData = require("./itemList.json")
-    //console.log("in function")//test code
-    if(itemList.hasOwnProperty(login['labID'])){
-      let temp = itemList[login['labID']]
-      if(temp.hasOwnProperty(serial)){
-        return temp[serial]
-      }else{
-        return ''
-      }
-    }else{
-      return ''
-    }
-    //return itemList[serial]
-    /*if(serial == "A00002"){
-        return "945eadcc-319a-4c21-89f2-1901defd742e"
-    }*/
-    
-    
-  }
   
   export default ReturnPage;

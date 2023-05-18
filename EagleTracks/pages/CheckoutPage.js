@@ -80,7 +80,6 @@ const CheckoutPage = ({navigation, style}) => {
           alert(`Item ${i + 1} not retrieved from database, please update the database list`)
         })
       }
-      success = false
       if(success){
         apiCaller()
       }

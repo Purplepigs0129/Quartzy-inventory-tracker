@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View,  Button, TextInput} from 'react-native';
 import * as API from '../apiFunctions.js'
-import itemList from '../itemList.json'
-import login from '../loginCred.json'
+
 const NewItemPage = ({navigation, style}) => {
     const updateList = (navigation) => {
       API.updateAll(navigation)

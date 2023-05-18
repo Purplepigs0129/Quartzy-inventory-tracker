@@ -12,7 +12,6 @@ import CredPage from './pages/CredPage.js'
 import CheckoutPage from './pages/CheckoutPage.js'
 import FinishPage from './pages/FinishPage.js';
 import NewItemPage from './pages/NewItemPage.js';
-import ReturnPage from './pages/ReturnPage.js';
 import WorkPage from './pages/WorkPage.js';
 import ResultsPage from './pages/ResultsPage.js';
 import { BarCodeScanner } from 'expo-barcode-scanner';
