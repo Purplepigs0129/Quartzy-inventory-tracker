@@ -193,7 +193,7 @@ const CheckoutPage = ({navigation, style}) => {
                 index ? 
                   <View style={style.removeButtonHolder}>
                     <Pressable style={style.removeButtonStyle} onPress={() => removeFormFields(index)}>
-                      <Text style={style.textStyle}>Remove</Text>
+                      <Text style={style.textStyle}>Remove Item</Text>
                     </Pressable>
                     <Text>{"\n"}</Text>
                   </View>
@@ -203,7 +203,7 @@ const CheckoutPage = ({navigation, style}) => {
           ))}
           <View>
               <Text>{"\n"}</Text>
-              <Button style={style.buttonStyle} onPress={() => addFormFields()} title="add" color="#a10022"></Button>
+              <Button style={style.buttonStyle} onPress={() => addFormFields()} title="additional item" color="#a10022"></Button>
               <Text>{"\n"}</Text>
               <Button style={style.buttonStyle} onPress={() => checkDecrease()} title="submit" color="#a10022"></Button>
           </View>
