@@ -45,13 +45,8 @@ async function getAll(){
     if(array.length == 0){
         alert("Quartzy database returned no items (they're probably down again)")
     }
-    //code bellow is for testing
-    /*const json1 = JSON.parse('{"technical_details": "A00002",  "name": "Beaker plastic 50ml", "id": "945eadcc-319a-4c21-89f2-1901defd742e"}')
-    const json2 = JSON.parse('{"technical_details": "A00004", "name": "testing test item", "id": "3159a2a3-0cf6-41e4-b42a-1ce179d412d4"}')
-    newArray = [json1, json2]
-    console.log(newArray)*/
+    
     console.log("Entering for loop")
-    requests = []
     for(let i = 0; i < array.length; i++){
         var result = await itemDB.getQuartzyItemSerial(array[i]['technical_details'])
         console.log(result)
@@ -61,16 +56,9 @@ async function getAll(){
         }
     }
 
-    /*await Promise.all(requests).then((response) => {
-        console.log("Promised")
-        console.log(response)
-    }).catch(error => {
-        console.log(error)
-    })*/
-
+    
     navigation.navigate('Success Page')
 
-    //response.json().then(json => {console.log(json)})
     }
 
 
