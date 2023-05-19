@@ -207,23 +207,6 @@ const CheckoutPage = ({navigation, style}) => {
               <Text>{"\n"}</Text>
               <Button style={style.buttonStyle} onPress={() => checkDecrease()} title="submit" color="#a10022"></Button>
           </View>
-
-        {/*<Text style={style.textStyle}>Number of items to be taken:</Text>
-        <TextInput
-          style={style.input}
-          placeholder=" # of the item to be taken"
-          onChangeText={
-            (value)=>setNumToDecr(value)
-          }
-          keyboardType="numeric"
-        />
-        <Text style={style.textStyle}>Will item be returned:</Text>
-        <Checkbox style={style.checkbox} value={toReturn} onValueChange={setToReturn} color={toReturn ? '00ff00' : '#000000'}/>
-        
-        
-        <Button style={style.buttonStyle} onPress={() => checkDecrease()} title="Submit" color="#a10022" />*/}
-        {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
-        {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
       <StatusBar style="auto" />
       </ScrollView>
       </SafeAreaView>
