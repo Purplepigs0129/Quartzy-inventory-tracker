@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
     width: '90%',
     alignItems: 'center',
   },
+  input1: {
+    margin: 7,
+    borderWidth: 2,
+    borderRadius: 5,
+    width: '78%',
+    alignItems: 'flex-start',
+  },
   textStyle: {
     margin: 7,
     alignItems: 'flex-start',

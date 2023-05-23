@@ -94,16 +94,18 @@ const CheckoutPage = ({navigation, style}) => {
           }
         />
         <Text style={style.textStyle}>ID of item being taken:</Text>
+        <SafeAreaView style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
         <TextInput
-          style={style.input}
+          style={style.input1}
           placeholder=" Item's ID being taken"
           onChangeText={
             (value)=>setItemToDecr(value)
           }
         />
         <Pressable>
-        <FontAwesome5 name="camera" size={24} color="black" onPress={() => navigation.navigate('Barcode Page')} />
+        <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
         </Pressable>
+        </SafeAreaView>
         <Text style={style.textStyle}>Number of items to be taken:</Text>
         <TextInput
           style={style.input}
