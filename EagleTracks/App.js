@@ -7,14 +7,20 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Should really look into cleaning up all the page imports.
 //Having each page in a separate feels great, though
-import HomePage from './components/HomePage.js'
-import CredPage from './components/CredPage.js'
-import CheckoutPage from './components/CheckoutPage.js'
-import FinishPage from './components/FinishPage.js';
-import NewItemPage from './components/NewItemPage.js';
-import ReturnPage from './components/ReturnPage.js';
-import WorkPage from './components/WorkPage.js';
+import HomePage from './pages/HomePage.js'
+import CredPage from './pages/CredPage.js'
+import CheckoutPage from './pages/CheckoutPage.js'
+import FinishPage from './pages/FinishPage.js';
+import NewItemPage from './pages/NewItemPage.js';
+import WorkPage from './pages/WorkPage.js';
+import ResultsPage from './pages/ResultsPage.js';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import CheckPage from './pages/CheckStockPage.js'
+import GetOrderNumPage from './pages/GetOrderNumPage.js'
+import MakeReturnPage from './pages/MakeReturnPage.js'
+import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
+import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
+import { createQuartzyTable } from './itemDB.js';
 
 //Initialization*****************************************************************
 
@@ -55,6 +61,26 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     margin: 8,
+  },
+  removeButtonStyle: {
+    alignItems: "center",
+    paddingVertical: 3,
+    paddingHorizontal: 0,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "#a10022",
+    width: "30%",
+  },
+  removeButtonHolder:{
+    alignItems: 'flex-end',
+    width: '92%',
+  },
+  itemInList: {
+    borderWidth: 1,
+    borderColor: "#808080",
+  },
+  dropDown: {
+    zIndex: 100
   }
 });
 
@@ -77,6 +103,12 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 //End Increase Page*****************************************
 
 //@App***************************************************************************************
+
+createTransactions()
+createCheckouts()
+createReturns()
+createQuartzyTable()
+
 const App = () => {
   return(
 
@@ -104,6 +136,21 @@ const App = () => {
         <Stack.Screen name = "Success Page">
         {(props)=><FinishPage {...props} style={styles}/>}
         </Stack.Screen>
+        <Stack.Screen name = "Results Page">
+        {(props)=><ResultsPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Check Quantity">
+        {(props)=><CheckPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Get Order Number">
+        {(props)=><GetOrderNumPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Make Return Page">
+        {(props)=><MakeReturnPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Checkout Success Page">
+        {(props)=><CheckoutSuccessPage {...props} style={styles}/>}
+        </Stack.Screen>
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -113,27 +160,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Button onPress={() => API.getAll()} title="Get All" color="#841584" />
-      <Button onPress={() => API.getQuantity("945eadcc-319a-4c21-89f2-1901defd742e")} title="Get Quantity" color="#841584" />
-      <Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, true)} title="Increase by 5" color="#841584" />
-      <Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false)} title="Decrease by 5" color="#841584" />
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-*/
