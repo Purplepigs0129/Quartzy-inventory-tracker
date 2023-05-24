@@ -181,9 +181,12 @@ const CheckoutPage = ({navigation, style}) => {
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeName(text, index)} />
               </View>*/}
               <Text>Item ID</Text>
-              <View>
-              <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />
+              <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
+              <Pressable>
+                <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
+              </Pressable>
               </View>
               <Text>Amount Needed</Text>
               <View>

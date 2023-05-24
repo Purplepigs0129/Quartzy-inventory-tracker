@@ -160,7 +160,6 @@ const App = () => {
         <Stack.Screen name = "Checkout Success Page">
         {(props)=><CheckoutSuccessPage {...props} style={styles}/>}
         </Stack.Screen>
-
         <Stack.Screen name = "Barcode Page">
         {(props)=><Barcode {...props} style={styles}/>}
         </Stack.Screen>
