@@ -18,6 +18,8 @@
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false
+      "infoPlist": {
+        "NSCameraUsageDescription":"This app uses the camera to scan barcodes"
       }
     },
     "android": {

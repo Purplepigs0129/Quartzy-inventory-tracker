@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import { StyleSheet, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
@@ -21,6 +22,7 @@ import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
 import { createQuartzyTable } from './itemDB.js';
+import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************
 
@@ -41,6 +43,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '90%',
     alignItems: 'center',
+  },
+  input1: {
+    margin: 7,
+    borderWidth: 2,
+    borderRadius: 5,
+    width: '78%',
+    alignItems: 'flex-start',
   },
   textStyle: {
     margin: 7,
@@ -152,6 +161,9 @@ const App = () => {
         {(props)=><CheckoutSuccessPage {...props} style={styles}/>}
         </Stack.Screen>
 
+        <Stack.Screen name = "Barcode Page">
+        {(props)=><Barcode {...props} style={styles}/>}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
     //End Screens****************************************************************************************
