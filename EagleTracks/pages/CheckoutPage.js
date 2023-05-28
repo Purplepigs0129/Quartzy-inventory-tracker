@@ -5,6 +5,7 @@ import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from
 import * as API from '../apiFunctions.js'
 import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from "../itemDB.js"
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const CheckoutPage = ({navigation, style}) => {
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
