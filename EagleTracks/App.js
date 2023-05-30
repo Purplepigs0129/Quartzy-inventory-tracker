@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   homeButtonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 10,
+    margin: 7,
     height: "25%",
     width: "45%",
     borderRadius: 20,
