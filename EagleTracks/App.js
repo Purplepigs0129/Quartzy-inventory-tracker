@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   },
   homeButtonText: {
     fontSize: 15,
+    color: 'white',
   },
   placeholder: {
     color: '#bababa',
