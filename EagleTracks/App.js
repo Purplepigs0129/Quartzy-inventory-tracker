@@ -31,6 +31,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#6D6E71',
     justifyContent: 'center',
     maxHeight: '100%',//for android buttons at bottom
+  },
+  homeContainer: {
+    flex: 1,
+    flexDirection:'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#6D6E71',
+    alignContent: 'center',
+    justifyContent: 'center',
+    maxHeight: '100%',//for android buttons at bottom
+    maxWidth: '100%',
 
   },
   scrollView:{
@@ -59,6 +69,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     
+  },
+  homeButtonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    height: "25%",
+    width: "45%",
+    borderRadius: 20,
+    backgroundColor: "#a10022",
+  },
+  homeButtonText: {
+    fontSize: 15,
   },
   placeholder: {
     color: '#bababa',
@@ -89,6 +111,13 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     zIndex: 100
+  },
+  accountButton: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    top: '6%',
+    left: 10,
+    position: 'absolute',
   }
 });
 
