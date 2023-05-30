@@ -6,11 +6,15 @@ import * as SecureStore from '../SecureStore'
 const CredPage = ({navigation, style}) => {
     const [newAccess, setAccess] = useState('');
     const [newLab, setLab] = useState('');
+    const [newLocation, setLocation] = useState('')
+
     const checkAccess = () => {
       if(!(newAccess.trim())){
         alert('Item Access Token is empty');
       }else if(!(newLab.trim())){
         alert('Lab ID is empty');
+      }else if(!(newLocation.trim())){
+        alert('Location tag is empty');
       }else{
         navigation.navigate('Working Page');
         credChanger();
@@ -22,6 +26,7 @@ const CredPage = ({navigation, style}) => {
       requests = []
       requests.push(SecureStore.save('AccessToken', newAccess));
       requests.push(SecureStore.save('LabID', newLab))
+      requests.push(SecureStore.save('RoomName', newLocation))
 
       await Promise.all(requests).then(() => {
         navigation.navigate('Success Page')
@@ -52,6 +57,15 @@ const CredPage = ({navigation, style}) => {
           placeholder=" Lab ID"
           onChangeText={
             (value)=>setLab(value)
+          }
+          
+        />
+        <Text style={style.textStyle}>Location Name:</Text>
+        <TextInput
+          style={style.input}
+          placeholder=" Location Name"
+          onChangeText={
+            (value)=>setLocation(value)
           }
           
         />
