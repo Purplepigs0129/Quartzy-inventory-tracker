@@ -49,18 +49,20 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 7,
+    marginLeft: "2.5%",
     borderWidth: 2,
     borderRadius: 5,
     paddingLeft: 6,
-    width: '90%',
+    width: '95%',
     alignItems: 'center',
   },
   input1: {
     margin: 7,
+    marginLeft: "2.5%",
     borderWidth: 2,
     borderRadius: 5,
     paddingLeft: 6,
-    width: '78%',
+    width: '85%',
     alignItems: 'flex-start',
   },
   textStyle: {
@@ -83,6 +85,8 @@ const styles = StyleSheet.create({
   buttonStyle: {
     alignItems: 'center',
     margin: 10,
+    marginLeft: "2.5%",
+    width: "95%",
     borderRadius: 10,
     backgroundColor: "#a10022",
     
@@ -90,8 +94,8 @@ const styles = StyleSheet.create({
   addButtonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: "17%",
-    width: "66%",
+    marginLeft: "25%",
+    width: "50%",
     borderRadius: 20,
     backgroundColor: "#a10022",
   },
