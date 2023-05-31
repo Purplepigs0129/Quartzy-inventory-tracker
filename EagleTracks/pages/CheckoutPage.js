@@ -136,7 +136,7 @@ const CheckoutPage = ({navigation, style}) => {
         <Text style={style.textStyle}>Class/Lab:</Text>
         <TextInput
           style={style.input}
-          placeholder=" Class/Lab"
+          placeholder="Class/Lab"
           onChangeText={
             (value)=>setClassName(value)
           }
@@ -144,7 +144,7 @@ const CheckoutPage = ({navigation, style}) => {
         <Text style={style.textStyle}>Room Number:</Text>
         <TextInput
           style={style.input}
-          placeholder=" Room Number"
+          placeholder="Room Number"
           onChangeText={
             (value)=>setRoomNum(value)
           }
@@ -152,7 +152,7 @@ const CheckoutPage = ({navigation, style}) => {
         <Text style={style.textStyle}>Instructor/PI:</Text>
         <TextInput
           style={style.input}
-          placeholder=" Instructor/PI"
+          placeholder="Instructor/PI"
           onChangeText={
             (value)=>setInstName(value)
           }
@@ -160,7 +160,7 @@ const CheckoutPage = ({navigation, style}) => {
         <Text style={style.textStyle}>Group/Name:</Text>
         <TextInput
           style={style.input}
-          placeholder=" Group/Name"
+          placeholder="Group/Name"
           onChangeText={
             (value)=>setStudentName(value)
           }
@@ -168,48 +168,64 @@ const CheckoutPage = ({navigation, style}) => {
         <Text style={style.textStyle}>StudentEmail:</Text>
         <TextInput
           style={style.input}
-          placeholder=" StudentEmail@ewu.edu"
+          placeholder="StudentEmail@ewu.edu"
           onChangeText={
             (value)=>setStudentEmail(value)
           }
         />
+        <Text style={style.lineBreakText}>{"\n\n\n"}</Text>
 
           {formValues.map((element, index) => (
             <View key={index} style={style.itemInList}>
-                <Text></Text>
+                <Text style={style.lineBreakText}></Text>
               {/*<Text>Item Name</Text>
               <View>
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeName(text, index)} />
               </View>*/}
-              <Text>Item ID</Text>
+              <Text style={style.textStyle}>Item ID:</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />
+                <TextInput 
+                  style={style.input1} 
+                  value={element.value} 
+                  placeholder="A000XX"
+                  onChangeText={text => handleChangeItem(text, index)}
+                />
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
                 <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
               </Pressable>
               </View>
-              <Text>Amount Needed</Text>
+              <Text style={style.textStyle}>Amount Needed:</Text>
               <View>
-              <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeAmount(text, index)} />
+                <TextInput 
+                  style={style.input} 
+                  value={element.value} 
+                  placeholder="15"
+                  onChangeText={text => handleChangeAmount(text, index)} 
+                />
               </View>
               {
                 index ? 
                   <View style={style.removeButtonHolder}>
+                    <Text style={style.afterRemoveBreak}></Text>
                     <Pressable style={style.removeButtonStyle} onPress={() => removeFormFields(index)}>
-                      <Text style={style.textStyle}>Remove Item</Text>
+                      <Text style={style.buttonTextStyle}>Remove Item</Text>
                     </Pressable>
-                    <Text>{"\n"}</Text>
                   </View>
                 : null
               }
+              <Text style={style.afterRemoveBreak}>{"\n"}</Text>
             </View>
           ))}
           <View>
-              <Text>{"\n"}</Text>
-              <Button style={style.buttonStyle} onPress={() => addFormFields()} title="additional item" color="#a10022"></Button>
-              <Text>{"\n"}</Text>
-              <Button style={style.buttonStyle} onPress={() => checkDecrease()} title="submit" color="#a10022"></Button>
+              <Text style={style.afterRemoveBreak}>{"\n"}</Text>
+              <Pressable style={style.addButtonStyle} onPress={() => addFormFields()}>
+                <Text style={style.buttonTextStyle}>Additional Item</Text>
+              </Pressable>
+              <Text style={style.afterRemoveBreak}>{"\n"}</Text>
+              <Pressable style={style.buttonStyle} onPress={() => checkDecrease()}>
+                <Text style={style.buttonTextStyle}>Submit</Text>
+              </Pressable>
           </View>
       <StatusBar style="auto" />
       </ScrollView>

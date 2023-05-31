@@ -19,8 +19,9 @@ import CheckPage from './pages/CheckStockPage.js'
 import GetOrderNumPage from './pages/GetOrderNumPage.js'
 import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
+import AppManagementPage from './pages/AppManagement.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
-import { createQuartzyTable } from './itemDB.js';
+import { createQuartzyTable, getFileLocation } from './itemDB.js';
 import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************
@@ -28,7 +29,7 @@ import Barcode from './components/Barcode.js';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6D6E71',
+    backgroundColor: '#d3d3d3',
     justifyContent: 'center',
     maxHeight: '100%',//for android buttons at bottom
   },
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:'row',
     flexWrap: 'wrap',
-    backgroundColor: '#6D6E71',
+    backgroundColor: '#d3d3d3',
     alignContent: 'center',
     justifyContent: 'center',
     maxHeight: '100%',//for android buttons at bottom
@@ -44,12 +45,13 @@ const styles = StyleSheet.create({
 
   },
   scrollView:{
-    backgroundColor: '#6D6E71'
+    backgroundColor: '#d3d3d3',
   },
   input: {
     margin: 7,
     borderWidth: 2,
     borderRadius: 5,
+    paddingLeft: 6,
     width: '90%',
     alignItems: 'center',
   },
@@ -57,31 +59,73 @@ const styles = StyleSheet.create({
     margin: 7,
     borderWidth: 2,
     borderRadius: 5,
+    paddingLeft: 6,
     width: '78%',
     alignItems: 'flex-start',
   },
   textStyle: {
     margin: 7,
     alignItems: 'flex-start',
-    color: '#fff',
+    color: '#000000',
+  },
+  textStyleReturn: {
+    marginLeft: 7,
+  },
+  valueStyleReturn: {
+    marginLeft: 14,
+    fontSize: 20,
+  },
+  buttonTextStyle:{
+    margin: 7,
+    alignItems: 'flex-start',
+    color: '#ffffff',
   },
   buttonStyle: {
     alignItems: 'center',
     margin: 10,
+    borderRadius: 10,
+    backgroundColor: "#a10022",
     
+  },
+  addButtonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: "17%",
+    width: "66%",
+    borderRadius: 20,
+    backgroundColor: "#a10022",
   },
   homeButtonStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 7,
+    margin: "1.25%",
     height: "25%",
     width: "45%",
     borderRadius: 20,
     backgroundColor: "#a10022",
   },
+  appManagementButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    top: '10%',
+    //top: '15%',//aligns better with other buttons
+    left: '3.75%',
+    width: "45%",
+    height: "7%",
+    backgroundColor: "#a10022",
+    borderRadius: 10,
+    position: 'absolute',
+  },
   homeButtonText: {
     fontSize: 15,
     color: 'white',
+  },
+  lineBreakText: {
+    fontSize: 2,
+  },
+  afterRemoveBreak: {
+    fontSize: 9,
   },
   placeholder: {
     color: '#bababa',
@@ -108,17 +152,14 @@ const styles = StyleSheet.create({
   },
   itemInList: {
     borderWidth: 1,
-    borderColor: "#808080",
+    borderColor: "#000000",
   },
   dropDown: {
     zIndex: 100
   },
-  accountButton: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    top: '6%',
-    left: 10,
-    position: 'absolute',
+  pickerStyle: {
+    borderWidth: 1,
+    borderColor: "#000000",
   }
 });
 
@@ -191,6 +232,9 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name = "Barcode Page">
         {(props)=><Barcode {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "App Management">
+        {(props)=><AppManagementPage {...props} style={styles}/>}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

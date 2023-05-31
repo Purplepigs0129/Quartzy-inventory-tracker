@@ -8,7 +8,12 @@ const ResultsPage = ({route, navigation, style}) => {
       <View style={style.container}>
         <Text style={style.textStyle}>Results:</Text>
           {formValues.map((element, key) => (
-            <Text key={key}>{formValues[key].resp}</Text>
+            <View>
+              <Text style={style.textStyle} key={key}>
+                {formValues[key].resp}
+                <Text style={style.lineBreakText}></Text>
+              </Text>
+            </View>
           ))}
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#a10022"/>
       <StatusBar style="auto" />
