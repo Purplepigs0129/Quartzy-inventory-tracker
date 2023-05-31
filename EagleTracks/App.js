@@ -14,11 +14,13 @@ import FinishPage from './pages/FinishPage.js';
 import NewItemPage from './pages/NewItemPage.js';
 import WorkPage from './pages/WorkPage.js';
 import ResultsPage from './pages/ResultsPage.js';
-import { BarCodeScanner } from 'expo-barcode-scanner';
 import CheckPage from './pages/CheckStockPage.js'
 import GetOrderNumPage from './pages/GetOrderNumPage.js'
 import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
+import LogDirectoryPage from './pages/LogDirectoryPage.js'
+import OrderHistoryPage from './pages/OrderHistoryPage.js'
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
 import { createQuartzyTable } from './itemDB.js';
 import Barcode from './components/Barcode.js';
@@ -158,10 +160,19 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name = "Checkout Success Page">
         {(props)=><CheckoutSuccessPage {...props} style={styles}/>}
-        </Stack.Screen>
+        </Stack.Screen
         <Stack.Screen name = "Barcode Page">
         {(props)=><Barcode {...props} style={styles}/>}
         </Stack.Screen>
+        <Stack.Screen name = "Log Directory">
+          {(props)=><LogDirectoryPage{...props} style={styles}/>}
+        </Stack.Screen>
+         <Stack.Screen name = "Order History">
+          {(props)=><OrderHistoryPage{...props} style={styles}/>}
+        </Stack.Screen>
+        {/*<Stack.Screen name = "Material Usage Statistics">
+
+        </Stack.Screen> */}
       </Stack.Navigator>
     </NavigationContainer>
     //End Screens****************************************************************************************

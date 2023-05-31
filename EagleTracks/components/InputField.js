@@ -25,6 +25,7 @@ const InputField = (props) => {
                     (entry)=>{
                         setValue(entry)
                         verifyData();
+                        props.onChange(value);
                     }
              }
          >

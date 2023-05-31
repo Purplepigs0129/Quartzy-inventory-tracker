@@ -12,6 +12,8 @@ const HomePage = ({navigation, style}) => {
         <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Checkout Items')} title="Checkout Items" color="#a10022"/>
         <Text></Text>
+        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Log Directory')} title="Records" color="#a10022"/>
+        <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Check Quantity')} title="Check Item Quantity" color="#a10022"/>
         <Text></Text>
         <Button style={style.buttonStyle} onPress={() => navigation.navigate('Add New Item')} title="Update Item List" color="#a10022"/>

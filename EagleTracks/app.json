@@ -32,9 +32,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "infoPlist": {
-      "NSCameraUsageDescription": "This app uses the camera to scan barcodes"
-    },
     "plugins": {
       "expo-barcode-scanner": {
         "cameraPermission": "Allow $(PRODUCT_NAME) to access camera."
