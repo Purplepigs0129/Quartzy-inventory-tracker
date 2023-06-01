@@ -7,7 +7,7 @@ import * as itemDB from '../itemDB'
 
 const ReturnPage = ({navigation, style}) => {
     
-    const [formValues, setFormValues] = useState([{ itemToCheck: "No Item", numNeeded: "", resp: "", itemNameHolder: ""}]);
+    const [formValues, setFormValues] = useState([{ itemToCheck: "Select an item", numNeeded: "", resp: "", itemNameHolder: ""}]);
     const [pickerList, setPickerList] = useState([])
     const [emptyLoad, setEmptyLoad] = useState(true)
     
@@ -18,7 +18,7 @@ const ReturnPage = ({navigation, style}) => {
       console.log('Value')
       console.log(value)
       const _pickerList = [...pickerList]
-      _pickerList.push('No Item')
+      _pickerList.push('Select an item')
       for(let i = 0; i < value.length; i ++){
         _pickerList.push(value[i]['ItemName'])
       }
@@ -49,9 +49,9 @@ const ReturnPage = ({navigation, style}) => {
                 testRun = false
                 alert(`Item ${i + 1} is not filled in`)
                 break
-            } else if(formValues[i].itemToCheck == 'No Item'){
+            } else if(formValues[i].itemToCheck == 'Select an item'){
               testRun = false
-              alert(`Item ${i + 1} was left on "No Item"`)
+              alert(`Item ${i + 1} was not selected`)
             } else if(!(formValues[i].numNeeded.trim())){
                 testRun = false
                 alert(`Amount needed for ${i + 1} is not filled in`)
@@ -124,7 +124,7 @@ const ReturnPage = ({navigation, style}) => {
     }
     
     let addFormFields = () => {
-        setFormValues([...formValues, { itemToCheck: "No Item", numNeeded: "", resp: "", itemNameHolder: ""}])
+        setFormValues([...formValues, { itemToCheck: "Select an item", numNeeded: "", resp: "", itemNameHolder: ""}])
       }
     
     let removeFormFields = (i) => {

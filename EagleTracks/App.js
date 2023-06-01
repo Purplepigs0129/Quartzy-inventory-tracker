@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    top: '10%',
-    //top: '15%',//aligns better with other buttons
+    //top: '15.5%',
+    top: '7.75%',
     left: '3.75%',
     width: "45%",
     height: "7%",
