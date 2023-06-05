@@ -6,8 +6,10 @@ import * as API from '../apiFunctions.js'
 import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from "../itemDB.js"
 import { FontAwesome5 } from '@expo/vector-icons';
+import Barcode from '../components/Barcode.js';
 
-const CheckoutPage = ({route, navigation, props, style}) => {
+const CheckoutPage = ({navigation, route, props, style}) => {
+
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
@@ -16,7 +18,7 @@ const CheckoutPage = ({route, navigation, props, style}) => {
     const [roomNum, setRoomNum] = useState('');
     const data = route.params;
     console.log(data)
-  
+
     const checkDecrease = () => {
       let testRun = true
       console.log("button pressed")
@@ -105,7 +107,7 @@ const CheckoutPage = ({route, navigation, props, style}) => {
     }
 
     let handleChangeItem = (text, index) => {
-
+      console.log(index)
       const _formValues = [...formValues]
       _formValues[index].itemToCheck = text.toUpperCase();
       console.log(text)
@@ -131,9 +133,8 @@ const CheckoutPage = ({route, navigation, props, style}) => {
   }
 
   useEffect(()=>{
-  console.log("UseEffect")
+
     if(data != null){
-      console.log("in if")
       handleChangeItem(data.returnString, data.routeIndex);
     }
   },[data])
