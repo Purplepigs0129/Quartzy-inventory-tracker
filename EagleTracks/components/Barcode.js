@@ -3,10 +3,11 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { TextInput, Text, View, StyleSheet, Button, Linking } from "react-native";
 
 
-const Barcode = (navigation, props, style, route) => {
+const Barcode = ({navigation, props, style, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const routeIndex = route.params;
+    console.log(routeIndex.index)
     
 
     useEffect(() => {
@@ -16,11 +17,6 @@ const Barcode = (navigation, props, style, route) => {
       })();
     }, []);
 
-if(props.children) {
-    this.children=props.children;
-} else {
-    this.children = <></>
-}
 
 const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);

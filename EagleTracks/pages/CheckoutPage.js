@@ -192,7 +192,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
                 <TextInput style={style.input1} value={element.value} onChangeText={text => handleChangeItem(text, index)}/>
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
-                <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
+                <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page', {index})} />
               </Pressable>
               </View>
               <Text>Amount Needed</Text>
