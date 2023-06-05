@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
@@ -7,14 +7,15 @@ import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from "../itemDB.js"
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const CheckoutPage = ({navigation, style}) => {
+const CheckoutPage = ({route, navigation, style}) => {
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
     const [instName, setInstName] = useState('');
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
-
+    const data = route.params;
+    console.log(data)
   
     const checkDecrease = () => {
       let testRun = true
@@ -129,6 +130,13 @@ const CheckoutPage = ({navigation, style}) => {
       setFormValues(newFormValues)
   }
 
+  useEffect(()=>{
+  console.log("UseEffect")
+    if(data != null){
+      console.log("in if")
+      handleChangeItem(data.returnString, data.routeIndex);
+    }
+  },[data])
 
     return(
       <SafeAreaView style={style.container}>
@@ -186,13 +194,13 @@ const CheckoutPage = ({navigation, style}) => {
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                 <TextInput 
                   style={style.input1} 
-                  value={element.value} 
+                  value={formValues[index].itemToCheck} 
                   placeholder="A000XX"
                   onChangeText={text => handleChangeItem(text, index)}
                 />
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
-                <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
+                <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page', {index})} />
               </Pressable>
               </View>
               <Text style={style.textStyle}>Amount Needed:</Text>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
-import { StyleSheet, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
+import { StyleSheet, Dimensions, Platform, PixelRatio, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
 import * as API from './apiFunctions.js'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -25,6 +25,21 @@ import { createQuartzyTable, getFileLocation } from './itemDB.js';
 import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************
+const {
+  width: SCREEN_WIDTH,
+  HEIGHT: SCREEN_HEIGHT
+} = Dimensions.get('window')
+
+const scale = SCREEN_HEIGHT / 1920 //scale to 1920 height (initial device scaled)
+
+function scaleFont(size) {
+  const newSize = size * scale
+  if (Platform.OS === 'android'){
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +47,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#d3d3d3',
     justifyContent: 'center',
     maxHeight: '100%',//for android buttons at bottom
+  },
+  resultsContainer: {
+    flex: 1,
+    backgroundColor: '#d3d3d3',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxHeight: '100%',
   },
   homeContainer: {
     flex: 1,
@@ -72,6 +94,13 @@ const styles = StyleSheet.create({
   },
   textStyleReturn: {
     marginLeft: 7,
+  },
+  resultsHeaderStyle: {
+    margin: 'auto',
+    fontSize: 25
+  },
+  returnNumberStyle: {
+    fontSize: 50,
   },
   valueStyleReturn: {
     marginLeft: 14,

@@ -165,7 +165,9 @@ const MakeReturnPage = ({route, navigation, style}) => {
             </View>
           ))}
           <Text>{"\n"}</Text>
-          <Button style={style.buttonStyle} onPress={() => checkReturn()} title="submit" color="#a10022"></Button>
+          <Pressable style={style.buttonStyle} onPress={() => checkReturn()}>
+            <Text style={style.buttonTextStyle}>Submit</Text>
+          </Pressable>
               
           <StatusBar style="auto" />
         </ScrollView>

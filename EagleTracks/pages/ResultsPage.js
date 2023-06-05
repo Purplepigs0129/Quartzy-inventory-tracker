@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {ScrollView, View, Text, SafeAreaView, Button, TextInput} from 'react-native';
+import {Pressable, ScrollView, View, Text, SafeAreaView, Button, TextInput} from 'react-native';
 
 const ResultsPage = ({route, navigation, style}) => {
   let {formValues} = route.params
     return(
-      <View style={style.container}>
+      <View style={style.resultsContainer}>
         <Text style={style.textStyle}>Results:</Text>
           {formValues.map((element, key) => (
             <View>
@@ -15,7 +15,10 @@ const ResultsPage = ({route, navigation, style}) => {
               </Text>
             </View>
           ))}
-        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#a10022"/>
+        <Text></Text>
+        <Pressable style={style.removeButtonStyle} onPress={() => navigation.navigate('Home')}>
+          <Text style={style.buttonTextStyle}>Return Home</Text>
+        </Pressable>
       <StatusBar style="auto" />
       </View>
     )
