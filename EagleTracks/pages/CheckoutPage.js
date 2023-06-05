@@ -16,7 +16,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
     const data = route.params;
-    const routeIndex = route.params;
+    console.log(data)
 
     const checkDecrease = () => {
       let testRun = true
@@ -132,8 +132,11 @@ const CheckoutPage = ({navigation, route, props, style}) => {
   }
 
   useEffect(()=>{
-    if(data != null && routeIndex != null)
-      handleChangeItem(data, routeIndex);
+    console.log("UseEffect")
+    if(data != null){
+      console.log("in if")
+      handleChangeItem(data.returnString, data.routeIndex);
+    }
   },[data])
     return(
       <SafeAreaView style={style.container}>

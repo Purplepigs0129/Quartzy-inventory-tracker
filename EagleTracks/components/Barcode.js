@@ -6,8 +6,9 @@ import { TextInput, Text, View, StyleSheet, Button, Linking } from "react-native
 const Barcode = ({navigation, props, style, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const routeIndex = route.params;
-    console.log(routeIndex.index)
+    const routeIndex = route.params.index;
+    console.log(routeIndex)
+    const [returnString, setReturnString] = useState('') 
     
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const handleBarCodeScanned = ({type, data}) => {
     const array = data.split("-");
     data = array[1];
     alert(`BarCode: ${data}`);
-    array[0] = routeIndex;
+    setReturnString(data)
 };
 
 if (hasPermission == null) {
@@ -40,7 +41,7 @@ return (
         style={ {height: 600, width: 400 }}
     />
     {scanned && <Button title='Scan again' onPress={() => setScanned(false)}/>}
-    <Button title='Submit' onPress={() => navigation.navigate('Checkout Items',  {data: array[1], routeIndex: array[0]}) } />
+    <Button title='Submit' onPress={() => navigation.navigate('Checkout Items',  {returnString, routeIndex}) } />
     </View>
 );
 };
