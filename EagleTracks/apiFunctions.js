@@ -27,39 +27,46 @@ async function getAll(){
   //Update List****************************************************
 
   async function updateAll(navigation){
-    var accessToken = await secureStore.getValueFor('AccessToken')
-    var roomName = await secureStore.getValueFor('RoomName')
-    
-    const url = "https://api.quartzy.com/inventory-items";
-    const response = await fetch(url, {
-        headers: {
-            'Accept': 'application/json',
-            'Access-Token': accessToken,
-            'Content-Type': 'application/json',
-        },
+    var pageNum = 0
+    var labId = await secureStore.getValueFor('LabID')
+
+    var continueLoop = true
+    while(continueLoop){
+
+        var accessToken = await secureStore.getValueFor('AccessToken')
+        var roomName = await secureStore.getValueFor('RoomName')
         
-    });
+        const url = `https://api.quartzy.com/inventory-items?page=${pageNum}&lab_id=${labId}`;
+        const response = await fetch(url, {
+            headers: {
+                'Accept': 'application/json',
+                'Access-Token': accessToken,
+                'Content-Type': 'application/json',
+            },
+            
+        });
 
-    const array = await response.json();//array of json objects
-    console.log("Array: ")
-    console.log(array)
-    if(array.length == 0){
-        alert("Quartzy database returned no items (they're probably down again)")
-    }
-    
-    console.log("Entering for loop")
-    for(let i = 0; i < array.length; i++){
-        if(array[i]['location']['name'] == roomName){
-            var result = await itemDB.getQuartzyItemSerial(array[i]['serial_number'])
-            console.log(result)
-            if(result.length == 0){
-                console.log("Insert new data")
-                itemDB.quartzyTableInsert(array[i]['serial_number'], array[i]['name'], array[i]['id'])
+        const array = await response.json();//array of json objects
+        console.log("Array: ")
+        console.log(array)
+        if(array.length != 0){
+            pageNum = pageNum + 1
+            console.log("Entering for loop")
+            for(let i = 0; i < array.length; i++){
+                if(array[i]['location']['name'] == roomName){
+                    var result = await itemDB.getQuartzyItemSerial(array[i]['serial_number'])
+                    console.log(result)
+                    if(result.length == 0){
+                        console.log("Insert new data")
+                        itemDB.quartzyTableInsert(array[i]['serial_number'], array[i]['name'], array[i]['id'])
+                    }
+                }
             }
+        }else{
+            continueLoop = false
         }
-    }
 
-    
+    }
     navigation.navigate('Success Page')
 
     }
