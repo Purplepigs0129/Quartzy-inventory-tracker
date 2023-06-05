@@ -16,7 +16,8 @@ const CheckoutPage = ({navigation, route, props, style}) => {
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
     const data = route.params;
-  
+    const routeIndex = route.params;
+
     const checkDecrease = () => {
       let testRun = true
       console.log("button pressed")
@@ -132,7 +133,8 @@ const CheckoutPage = ({navigation, route, props, style}) => {
 
   //function to call other function after data is passed backr
   useEffect(()=>{
-    handleChangeItem(index, data);
+    if(data != null && routeIndex != null)
+      handleChangeItem(routeIndex, data);
   },[data])
     return(
       <SafeAreaView style={style.container}>
@@ -187,7 +189,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
               </View>*/}
               <Text>Item ID</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)}/>
+                <TextInput style={style.input1} value={element.value} onChangeText={text => handleChangeItem(text, index)}/>
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
                 <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
