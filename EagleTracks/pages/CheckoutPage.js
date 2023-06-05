@@ -106,7 +106,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
     }
 
     let handleChangeItem = (text, index) => {
-
+      console.log(index)
       const _formValues = [...formValues]
       _formValues[index].itemToCheck = text.toUpperCase();
       console.log(text)
