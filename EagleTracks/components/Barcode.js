@@ -3,10 +3,12 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { TextInput, Text, View, StyleSheet, Button, Linking } from "react-native";
 
 
-const Barcode = (navigation, props) => {
+const Barcode = (navigation, props, style) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
   
+    
+
     useEffect(() => {
       (async() => {
           const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -41,6 +43,7 @@ return (
         style={ {height: 600, width: 400 }}
     />
     {scanned && <Button title='Scan again' onPress={() => setScanned(false)}/>}
+    <Button title='Submit' onPress={() => navigation.navigate('Checkout Items',  {data: JSON.stringify(data)}) } />
     </View>
 );
 };

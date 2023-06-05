@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
@@ -6,15 +6,16 @@ import * as API from '../apiFunctions.js'
 import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from "../itemDB.js"
 import { FontAwesome5 } from '@expo/vector-icons';
+import Barcode from '../components/Barcode.js';
 
-const CheckoutPage = ({navigation, style}) => {
+const CheckoutPage = ({navigation, route, props, style}) => {
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
     const [instName, setInstName] = useState('');
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
-
+    const data = route.params;
   
     const checkDecrease = () => {
       let testRun = true
@@ -129,7 +130,10 @@ const CheckoutPage = ({navigation, style}) => {
       setFormValues(newFormValues)
   }
 
-
+  //function to call other function after data is passed backr
+  useEffect(()=>{
+    handleChangeItem(index, data);
+  },[data])
     return(
       <SafeAreaView style={style.container}>
         <ScrollView style={style.scrollView}>
@@ -183,7 +187,7 @@ const CheckoutPage = ({navigation, style}) => {
               </View>*/}
               <Text>Item ID</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />
+                <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)}/>
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
                 <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page')} />
