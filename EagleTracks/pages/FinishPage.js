@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, Pressable} from 'react-native';
 
 const FinishPage = ({navigation, style}) => {
     return(
-      <View style={style.container}>
-        <Text style={style.textStyle}>Success</Text>
-        {<Button style={style.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#a10022"/>}
+      <View style={style.resultsContainer}>
+        <Text style={style.resultsHeaderStyle}>Success</Text>
+        <Text></Text>
+        <Pressable style={style.removeButtonStyle} onPress={() => navigation.navigate('Home')}>
+          <Text style={style.buttonTextStyle}>Return Home</Text>
+        </Pressable>
       <StatusBar style="auto" />
       </View>
     )

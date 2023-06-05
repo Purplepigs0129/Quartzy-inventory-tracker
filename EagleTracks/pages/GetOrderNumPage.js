@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TextInput} from 'react-native';
+import { Pressable, Text, View, Button, TextInput} from 'react-native';
 import * as db from '../dbFunctions.js'
 
 const ReturnPage = ({navigation, style}) => {
@@ -37,7 +37,9 @@ const ReturnPage = ({navigation, style}) => {
           
         />
         
-        <Button style={style.buttonStyle} onPress={() => checkReturn()} title="Submit" color="#a10022" />
+        <Pressable style={style.buttonStyle} onPress={() => checkReturn()}>
+          <Text style={style.buttonTextStyle}>Submit</Text>
+        </Pressable>
         
       <StatusBar style="auto" />
       </View>

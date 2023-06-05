@@ -7,7 +7,7 @@ import * as itemDB from '../itemDB'
 
 const ReturnPage = ({navigation, style}) => {
     
-    const [formValues, setFormValues] = useState([{ itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}]);
+    const [formValues, setFormValues] = useState([{ itemToCheck: "Select an item", numNeeded: "", resp: "", itemNameHolder: ""}]);
     const [pickerList, setPickerList] = useState([])
     const [emptyLoad, setEmptyLoad] = useState(true)
     
@@ -18,6 +18,7 @@ const ReturnPage = ({navigation, style}) => {
       console.log('Value')
       console.log(value)
       const _pickerList = [...pickerList]
+      _pickerList.push('Select an item')
       for(let i = 0; i < value.length; i ++){
         _pickerList.push(value[i]['ItemName'])
       }
@@ -48,9 +49,9 @@ const ReturnPage = ({navigation, style}) => {
                 testRun = false
                 alert(`Item ${i + 1} is not filled in`)
                 break
-            } else if(formValues[i].itemToCheck == 'Placeholder'){
+            } else if(formValues[i].itemToCheck == 'Select an item'){
               testRun = false
-              alert(`Item ${i + 1} was left on placeholder`)
+              alert(`Item ${i + 1} was not selected`)
             } else if(!(formValues[i].numNeeded.trim())){
                 testRun = false
                 alert(`Amount needed for ${i + 1} is not filled in`)
@@ -123,7 +124,7 @@ const ReturnPage = ({navigation, style}) => {
     }
     
     let addFormFields = () => {
-        setFormValues([...formValues, { itemToCheck: "Placeholder", numNeeded: "", resp: "", itemNameHolder: ""}])
+        setFormValues([...formValues, { itemToCheck: "Select an item", numNeeded: "", resp: "", itemNameHolder: ""}])
       }
     
     let removeFormFields = (i) => {
@@ -138,9 +139,10 @@ const ReturnPage = ({navigation, style}) => {
           {formValues.map((element, index) => (
             <View key={index} style={style.itemInList}>
                 <Text></Text>
-              <Text>Item ID</Text>
+              <Text style={style.textStyle}>Item ID:</Text>
               <View>
                 <Picker
+                style={style.pickerStyle}
                   selectedValue={formValues[index].itemToCheck}
                   onValueChange={(itemValue, itemIndex) => handleChangeItem(itemValue, index)}
                 >
@@ -152,27 +154,32 @@ const ReturnPage = ({navigation, style}) => {
                 </Picker>
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               </View>
-              <Text>Amount Needed</Text>
+              <Text style={style.textStyle}>Amount Needed:</Text>
               <View>
               <TextInput style={style.input} value={element.value} onChangeText={text => handleChangeAmount(text, index)} />
               </View>
               {
                 index ? 
                   <View style={style.removeButtonHolder}>
+                    <Text style={style.lineBreakText}>{"\n"}</Text>
                     <Pressable style={style.removeButtonStyle} onPress={() => removeFormFields(index)}>
-                      <Text style={style.textStyle}>Remove</Text>
+                      <Text style={style.buttonTextStyle}>Remove Item</Text>
                     </Pressable>
-                    <Text>{"\n"}</Text>
                   </View>
                 : null
               }
+              <Text style={style.afterRemoveBreak}>{"\n"}</Text>
             </View>
           ))}
           <View>
-              <Text>{"\n"}</Text>
-              <Button style={style.buttonStyle} onPress={() => addFormFields()} title="add" color="#a10022"></Button>
-              <Text>{"\n"}</Text>
-              <Button style={style.buttonStyle} onPress={() => checkFields()} title="submit" color="#a10022"></Button>
+          <Text style={style.afterRemoveBreak}>{"\n"}</Text>
+              <Pressable style={style.addButtonStyle} onPress={() => addFormFields()}>
+                <Text style={style.buttonTextStyle}>Additional Item</Text>
+              </Pressable>
+              <Text style={style.afterRemoveBreak}></Text>
+              <Pressable style={style.buttonStyle} onPress={() => checkFields()}>
+                <Text style={style.buttonTextStyle}>Submit</Text>
+              </Pressable>
           </View>
       </ScrollView>
       </SafeAreaView>

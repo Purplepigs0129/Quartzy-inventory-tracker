@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {ScrollView, View, Text, SafeAreaView, Button, TextInput} from 'react-native';
+import {Pressable, ScrollView, View, Text, SafeAreaView, Button, TextInput} from 'react-native';
 
 const CheckoutSuccessPage = ({route, navigation, style}) => {
   console.log(route.params.value[0]["OrderNum"])
     return(
-      <View style={style.container}>
+      <View style={style.resultsContainer}>
         <Text style={style.textStyle}>Order Number:</Text>
           
-            <Text> {route.params.value[0]["OrderNum"]}</Text>
+            <Text style={style.returnNumberStyle}> {route.params.value[0]["OrderNum"]}</Text>
             <Text></Text>
           
-        <Button style={style.buttonStyle} onPress={() => navigation.navigate('Home')} title="Return Home" color="#a10022"/>
+        <Pressable style={style.removeButtonStyle} onPress={() => navigation.navigate('Home')}>
+          <Text style={style.buttonTextStyle}>Return Home</Text>
+        </Pressable>
       <StatusBar style="auto" />
       </View>
     )

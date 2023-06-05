@@ -28,6 +28,7 @@ async function getAll(){
 
   async function updateAll(navigation){
     var accessToken = await secureStore.getValueFor('AccessToken')
+    var roomName = await secureStore.getValueFor('RoomName')
     
     const url = "https://api.quartzy.com/inventory-items";
     const response = await fetch(url, {
@@ -39,7 +40,7 @@ async function getAll(){
         
     });
 
-    const array = await response.json();
+    const array = await response.json();//array of json objects
     console.log("Array: ")
     console.log(array)
     if(array.length == 0){
@@ -48,11 +49,13 @@ async function getAll(){
     
     console.log("Entering for loop")
     for(let i = 0; i < array.length; i++){
-        var result = await itemDB.getQuartzyItemSerial(array[i]['technical_details'])
-        console.log(result)
-        if(result.length == 0){
-            console.log("Insert new data")
-            itemDB.quartzyTableInsert(array[i]['technical_details'], array[i]['name'], array[i]['id'])
+        if(array[i]['location']['name'] == roomName){
+            var result = await itemDB.getQuartzyItemSerial(array[i]['serial_number'])
+            console.log(result)
+            if(result.length == 0){
+                console.log("Insert new data")
+                itemDB.quartzyTableInsert(array[i]['serial_number'], array[i]['name'], array[i]['id'])
+            }
         }
     }
 
