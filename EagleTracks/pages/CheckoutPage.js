@@ -131,10 +131,9 @@ const CheckoutPage = ({navigation, route, props, style}) => {
       setFormValues(newFormValues)
   }
 
-  //function to call other function after data is passed backr
   useEffect(()=>{
     if(data != null && routeIndex != null)
-      handleChangeItem(routeIndex, data);
+      handleChangeItem(data, routeIndex);
   },[data])
     return(
       <SafeAreaView style={style.container}>
