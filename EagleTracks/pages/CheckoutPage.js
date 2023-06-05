@@ -17,7 +17,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
     const [className, setClassName] = useState('');
     const [roomNum, setRoomNum] = useState('');
     const data = route.params;
-    console.log(data)
+    //console.log(data)
 
     const checkDecrease = () => {
       let testRun = true
