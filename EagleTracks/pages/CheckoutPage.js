@@ -7,7 +7,7 @@ import * as dbFunctions from "../dbFunctions.js"
 import * as itemDB from "../itemDB.js"
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const CheckoutPage = ({route, navigation, style}) => {
+const CheckoutPage = ({route, navigation, style, props}) => {
     const [formValues, setFormValues] = useState([{ itemToCheck: "", itemID: "", numNeeded: "", resp: "", itemName: ""}]);
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
