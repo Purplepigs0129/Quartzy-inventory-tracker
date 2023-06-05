@@ -191,7 +191,7 @@ const CheckoutPage = ({navigation, route, props, style}) => {
               </View>*/}
               <Text>Item ID</Text>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
-                <TextInput style={style.input1} value={element.value} onChangeText={text => handleChangeItem(text, index)}/>
+                <TextInput style={style.input1} value={formValues[index].itemToCheck} onChangeText={text => handleChangeItem(text, index)}/>
               {/*<TextInput style={style.input} value={element.value} onChangeText={text => handleChangeItem(text, index)} />*/}
               <Pressable>
                 <FontAwesome5 name="camera" size={32} color="black" onPress={() => navigation.navigate('Barcode Page', {index})} />
