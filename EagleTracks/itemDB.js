@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite'
 
-const db = SQLite.openDatabase('quartzyItems-test2.db')
+const db = SQLite.openDatabase('quartzyItems-Demo.db')
 
 //CREATION SCRIPTS*****************************************************************************
 
