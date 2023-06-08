@@ -76,20 +76,14 @@ async function getAll(){
 
   async function checkBatch(formValues, navigation){
     var nav = true;
+    var saveFormValues = JSON.parse(JSON.stringify(formValues))
+    //for some reason, formValues worked on my emulator, but doesn't work on my phone when 
+    //checking more than one value.  This gets around the issue but is far from efficient.
     var accessToken = await secureStore.getValueFor('AccessToken')
     
     for (let i = 0; i < formValues.length; i++){
-        console.log(formValues[i].itemToCheck)
-        itemID = formValues[i].itemToCheck
-        if(!(itemID.trim())){
-            alert(`Item ${i} is not present in item list, please update item list`)
-            nav = false
-            break
-        }
-        console.log('checkID')
-        console.log(itemID)
-
-        const url = "https://api.quartzy.com/inventory-items/".concat(itemID);
+        
+        const url = "https://api.quartzy.com/inventory-items/".concat(saveFormValues[i].itemToCheck);
         const response = await fetch(url, {
             headers: {
                 'Accept': 'application/json',
@@ -97,7 +91,7 @@ async function getAll(){
             },
             
         });
-  
+        console.log(url)
         const quantResp = await response.json();
 
         console.log("Response Status: ")
