@@ -1,6 +1,7 @@
 #Guidelines For Future Developers
 
-One important note: our app is designed to interact with Quartzy’s API. Their dev page is: https://docs.quartzy.com/api/#operation/inventoryItemList
+One important note: our app is designed to interact with Quartzy’s API. Their dev page is: 
+https://docs.quartzy.com/api/#operation/inventoryItemList
 Their API uses globally unique IDs that are only accessible through their API.  You cannot use serial numbers to make API adjustments, you must use unique IDs.
 In EagleTracks, we interact with their API by using fetch to make requests.  If this is your first time interacting with an API, please use a service like ReqBin (https://reqbin.com/) in combination with their user docs to understand how you are meant to interact with the API.  A good first place to start would be making the call to "list and filter inventory items", then use the ID from one of those items to pull it specifically through the "Get an inventory item" call.
 
