@@ -15,7 +15,9 @@ In the Pages folder you'll find all of the different pages accessed by the stack
 
 All data related to the app is stored across the branches: main, Arthur-Branch, Barcode-scanner, and CSV-Branch, and in the forks CKappes-Git/Quartzy-inventory-tracker, and A-Tanner/Quartzy-inventory-tracker.  
 Quartzy API interactions are stored in the apiFunctions.js file.  
+
 Our functions for building and interacting with the database responsible for tracking transactions are in the dbFunctions.js file.
+
 The itemDB.js file is responsible for the database that keeps a local translator for item name to item serial to item globally unique ID.  
 
 For instructions on how to build the software for local use, see README.MD.  
