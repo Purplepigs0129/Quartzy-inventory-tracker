@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     width: '92%',
   },
   itemInList: {
-    borderWidth: 1,
+    borderTopWidth: 1,
     borderColor: "#000000",
   },
   dropDown: {

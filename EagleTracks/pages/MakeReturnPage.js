@@ -29,7 +29,7 @@ const MakeReturnPage = ({route, navigation, style}) => {
         if(formValues[i].amountToReturn == ''){
           testRun = false
           alert(`Amount to return of ${i + 1} is empty`)
-        }else if(!(parseInt(String(formValues[i].amountToReturn)))){
+        }else if(!(parseInt(String(formValues[i].amountToReturn)) + 1)){//add one to parse int because returning 0 is a valid transaction
           console.log(formValues[i].amountToReturn)
           testRun = false
           alert(`Amount to return of ${i + 1} is not a number`)
