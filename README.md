@@ -9,9 +9,11 @@ To run this code, you will need React Native Expo and, by extension, Node.js.
 
 Node.js can be installed through their website: https://nodejs.org/en
 
-React Native Expo can be installed with the following command:
+Once Node.js in installed, all other requirements can be installed by cloning the repo, navigating to the EagleTracks folder, and running:
 
-npx expo install react-native@0.71.6
+"npm install"
+
+Note: if you are using Visual Studio Code, you can open the folder, create a new terminal and run the command from there.
 
 After installing expo, you will need to copy the source code (either through cloning the main repository, or by downloading it as a zip).
 
