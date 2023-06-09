@@ -5,7 +5,11 @@ The app project files are all stored in the EagleTracks folder.
 
 All data related to the app is stored across the branches: main, Arthur-Branch, Barcode-scanner, and CSV-Branch, and in the forks CKappes-Git/Quartzy-inventory-tracker, and A-Tanner/Quartzy-inventory-tracker.  
 
-To run this code, you will need React Native Expo.  React Native Expo can be installed with the following command:
+To run this code, you will need React Native Expo and, by extension, Node.js.  
+
+Node.js can be installed through their website: https://nodejs.org/en
+
+React Native Expo can be installed with the following command:
 
 npx expo install react-native@0.71.6
 
