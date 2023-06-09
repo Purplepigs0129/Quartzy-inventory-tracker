@@ -24,7 +24,7 @@ Once you have the app running, please know that you will need a Quartzy account 
 2. Then, from the Quartzy home page for your lab, click the down arrow in the top left and click the gear next to your lab.
 3. Click the "developers" tab to access lab information.
 4. Copy your Lab ID and save it for later.
-5. Back in your Quqrtzy inventory page, click an item that is in the location you want to modify and copy its location (you can also just note the location, however it must be entered exactly in the app).
+5. Back in your Quartzy inventory page, click an item that is in the location you want to modify and copy its location (you can also just note the location, however it must be entered exactly in the app).
 6. In EagleTracks, from the home page, click on the "App Management" button in the top left.
 7. In App Management, click on the "Change Credentials" button on the left.
 8. Enter your Quartzy access token, Lab ID, and the room you intend to manage into the appropriate fields.
