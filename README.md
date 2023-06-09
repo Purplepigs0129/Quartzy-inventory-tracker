@@ -26,6 +26,7 @@ Once the app is running, you pull it up on your phone in two ways.
 2. You can download the Expo Go app on your phone and directly run the app on your phone.
 
 Once you have the app running, please know that you will need a Quartzy account and follow these steps.  
+Note: a more detailed description of these steps is available at the end of the user guide. 
 1. Once you have a Quartzy account, navigate to https://app.quartzy.com/profile/access-tokens and generate an access token (save it for later).  
 2. Then, from the Quartzy home page for your lab, click the down arrow in the top left and click the gear next to your lab.
 3. Click the "developers" tab to access lab information.
