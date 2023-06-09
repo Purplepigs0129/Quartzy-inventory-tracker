@@ -13,13 +13,9 @@ Once Node.js in installed, all other requirements can be installed by cloning th
 
 "npm install"
 
-Note: if you are using Visual Studio Code, you can open the folder, create a new terminal and run the command from there.
+Note: if you are using Visual Studio Code, you can open the folder, create a new terminal, and run the command from there.
 
-After installing expo, you will need to copy the source code (either through cloning the main repository, or by downloading it as a zip).
-
-After the source code has been downloaded, simply navigate to the EagleTracks folder and run "npm install" to install all required packages.
-
-Once the installation is complete, run the command "npm start" to start the app.  
+Once the installation is complete, run the command "npm start" to start the app (in visual studio code, this can be done from a terminal while the project folder is opened).  
 
 Once the app is running, you pull it up on your phone in two ways.
 1. You can use an emulator on your computer (such as through Android Studio's built-in emulators).
