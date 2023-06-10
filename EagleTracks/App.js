@@ -216,10 +216,10 @@ function handleInsert(navigation, itemID, numToIncr, incr){
 
 //@App***************************************************************************************
 
-createTransactions()
-createCheckouts()
-createReturns()
-createQuartzyTable()
+//createTransactions()
+//createCheckouts()
+//createReturns()
+//createQuartzyTable()
 
 const App = () => {
   return(
