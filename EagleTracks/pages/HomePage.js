@@ -30,7 +30,7 @@ const HomePage = ({navigation, style}) => {
           <Text style={style.lineBreakText}></Text>
           <Text style={style.homeButtonText}>Check Item Quantity</Text>
         </Pressable>
-        <Pressable style={style.homeButtonStyle} onPress={() => navigation.navigate('Add New Item')} title="Update Item List">
+        <Pressable style={style.homeButtonStyle} onPress={() => navigation.navigate('Transaction Functions')} title="Update Item List">
           <AntDesign name="database" size={64} color="white" />
           <Text style={style.lineBreakText}></Text>
           <Text style={style.homeButtonText}>View Transactions</Text>

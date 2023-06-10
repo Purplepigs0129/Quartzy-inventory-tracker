@@ -11,7 +11,7 @@ import HomePage from './pages/HomePage.js'
 import CredPage from './pages/CredPage.js'
 import CheckoutPage from './pages/CheckoutPage.js'
 import FinishPage from './pages/FinishPage.js';
-import NewItemPage from './pages/NewItemPage.js';
+import TransactionFunctionPage from './pages/TransactionFunctionPage.js';
 import WorkPage from './pages/WorkPage.js';
 import ResultsPage from './pages/ResultsPage.js';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -23,6 +23,7 @@ import AppManagementPage from './pages/AppManagement.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
 import { createQuartzyTable, getFileLocation } from './itemDB.js';
 import Barcode from './components/Barcode.js';
+import OrderHistoryPage from './pages/OrderHistoryPage.js';
 
 //Initialization*****************************************************************
 const {
@@ -239,8 +240,8 @@ const App = () => {
         <Stack.Screen name = "Checkout Items">
           {(props)=><CheckoutPage {...props} style={styles}/>}
         </Stack.Screen>
-        <Stack.Screen name = "Add New Item">
-          {(props)=><NewItemPage {...props} style={styles}/>}
+        <Stack.Screen name = "Transaction Functions">
+          {(props)=><TransactionFunctionPage {...props} style={styles}/>}
         </Stack.Screen>
         <Stack.Screen name = "Working Page">
           {(props)=><WorkPage {...props} style={styles}/>}
@@ -268,6 +269,9 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name = "App Management">
         {(props)=><AppManagementPage {...props} style={styles}/>}
+        </Stack.Screen>
+        <Stack.Screen name = "Order History">
+        {(props)=><OrderHistoryPage {...props} style = {styles}/>}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
