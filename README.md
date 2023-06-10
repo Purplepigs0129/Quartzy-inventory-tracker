@@ -1,7 +1,7 @@
 # EagleTracks
 EagleTracks is an unofficial companion app for use with Quartzy lab management to track items as they change location, are consumed or broken, and make real time adjustments to Quartzy's inventory.  
 
-# Filse
+# Files
 
 The app project files are all stored in the EagleTracks folder.
 
