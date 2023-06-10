@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
-import { StyleSheet, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
+import { StyleSheet, Dimensions, Platform, PixelRatio, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
 import * as API from './apiFunctions.js'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,53 +14,151 @@ import FinishPage from './pages/FinishPage.js';
 import NewItemPage from './pages/NewItemPage.js';
 import WorkPage from './pages/WorkPage.js';
 import ResultsPage from './pages/ResultsPage.js';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import CheckPage from './pages/CheckStockPage.js'
 import GetOrderNumPage from './pages/GetOrderNumPage.js'
 import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
-import LogDirectoryPage from './pages/LogDirectoryPage.js'
-import OrderHistoryPage from './pages/OrderHistoryPage.js'
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import AppManagementPage from './pages/AppManagement.js'
 import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
-import { createQuartzyTable } from './itemDB.js';
+import { createQuartzyTable, getFileLocation } from './itemDB.js';
 import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************
+const {
+  width: SCREEN_WIDTH,
+  HEIGHT: SCREEN_HEIGHT
+} = Dimensions.get('window')
+
+const scale = SCREEN_HEIGHT / 1920 //scale to 1920 height (initial device scaled)
+
+function scaleFont(size) {
+  const newSize = size * scale
+  if (Platform.OS === 'android'){
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6D6E71',
+    backgroundColor: '#d3d3d3',
     justifyContent: 'center',
     maxHeight: '100%',//for android buttons at bottom
+  },
+  resultsContainer: {
+    flex: 1,
+    backgroundColor: '#d3d3d3',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxHeight: '100%',
+  },
+  homeContainer: {
+    flex: 1,
+    flexDirection:'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#d3d3d3',
+    alignContent: 'center',
+    justifyContent: 'center',
+    maxHeight: '100%',//for android buttons at bottom
+    maxWidth: '100%',
 
   },
   scrollView:{
-    backgroundColor: '#6D6E71'
+    backgroundColor: '#d3d3d3',
   },
   input: {
     margin: 7,
+    marginLeft: "2.5%",
     borderWidth: 2,
     borderRadius: 5,
-    width: '90%',
+    paddingLeft: 6,
+    width: '95%',
     alignItems: 'center',
   },
   input1: {
     margin: 7,
+    marginLeft: "2.5%",
     borderWidth: 2,
     borderRadius: 5,
-    width: '78%',
+    paddingLeft: 6,
+    width: '85%',
     alignItems: 'flex-start',
   },
   textStyle: {
     margin: 7,
     alignItems: 'flex-start',
-    color: '#fff',
+    color: '#000000',
+  },
+  textStyleReturn: {
+    marginLeft: 7,
+  },
+  resultsHeaderStyle: {
+    margin: 'auto',
+    fontSize: 25
+  },
+  returnNumberStyle: {
+    fontSize: 50,
+  },
+  valueStyleReturn: {
+    marginLeft: 14,
+    fontSize: 20,
+  },
+  buttonTextStyle:{
+    margin: 7,
+    alignItems: 'flex-start',
+    color: '#ffffff',
   },
   buttonStyle: {
     alignItems: 'center',
     margin: 10,
+    marginLeft: "2.5%",
+    width: "95%",
+    borderRadius: 10,
+    backgroundColor: "#a10022",
     
+  },
+  addButtonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: "25%",
+    width: "50%",
+    borderRadius: 20,
+    backgroundColor: "#a10022",
+  },
+  homeButtonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: "1.25%",
+    height: "25%",
+    width: "45%",
+    borderRadius: 20,
+    backgroundColor: "#a10022",
+  },
+  appManagementButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    //top: '15.5%',
+    top: '7.75%',
+    left: '3.75%',
+    width: "45%",
+    height: "7%",
+    backgroundColor: "#a10022",
+    borderRadius: 10,
+    position: 'absolute',
+  },
+  homeButtonText: {
+    fontSize: 15,
+    color: 'white',
+  },
+  lineBreakText: {
+    fontSize: 2,
+  },
+  afterRemoveBreak: {
+    fontSize: 9,
   },
   placeholder: {
     color: '#bababa',
@@ -86,11 +184,15 @@ const styles = StyleSheet.create({
     width: '92%',
   },
   itemInList: {
-    borderWidth: 1,
-    borderColor: "#808080",
+    borderTopWidth: 1,
+    borderColor: "#000000",
   },
   dropDown: {
     zIndex: 100
+  },
+  pickerStyle: {
+    borderWidth: 1,
+    borderColor: "#000000",
   }
 });
 
@@ -160,19 +262,13 @@ const App = () => {
         </Stack.Screen>
         <Stack.Screen name = "Checkout Success Page">
         {(props)=><CheckoutSuccessPage {...props} style={styles}/>}
-        </Stack.Screen
+        </Stack.Screen>
         <Stack.Screen name = "Barcode Page">
         {(props)=><Barcode {...props} style={styles}/>}
         </Stack.Screen>
-        <Stack.Screen name = "Log Directory">
-          {(props)=><LogDirectoryPage{...props} style={styles}/>}
+        <Stack.Screen name = "App Management">
+        {(props)=><AppManagementPage {...props} style={styles}/>}
         </Stack.Screen>
-         <Stack.Screen name = "Order History">
-          {(props)=><OrderHistoryPage{...props} style={styles}/>}
-        </Stack.Screen>
-        {/*<Stack.Screen name = "Material Usage Statistics">
-
-        </Stack.Screen> */}
       </Stack.Navigator>
     </NavigationContainer>
     //End Screens****************************************************************************************

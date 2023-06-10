@@ -29,7 +29,7 @@ const MakeReturnPage = ({route, navigation, style}) => {
         if(formValues[i].amountToReturn == ''){
           testRun = false
           alert(`Amount to return of ${i + 1} is empty`)
-        }else if(!(parseInt(String(formValues[i].amountToReturn)))){
+        }else if(!(parseInt(String(formValues[i].amountToReturn)) + 1)){//add one to parse int because returning 0 is a valid transaction
           console.log(formValues[i].amountToReturn)
           testRun = false
           alert(`Amount to return of ${i + 1} is not a number`)
@@ -143,28 +143,34 @@ const MakeReturnPage = ({route, navigation, style}) => {
           {formValues.map((element, index) => (
             <View key={index} style={style.itemInList}>
                 <Text></Text>
-              <Text>Item Name:</Text>
-              <Text>
+              <Text  style={style.textStyleReturn}>Item Name:</Text>
+              <Text  style={style.valueStyleReturn}>
                 { formValues[index].ItemName }
               </Text>
-              <Text>Item Serial:</Text>
+              <Text style={style.lineBreakText}></Text>
+              <Text style={style.textStyleReturn}>Item Serial:</Text>
               <View>
-                <Text>{ formValues[index].ItemSerial }</Text>
+                <Text style={style.valueStyleReturn}>{ formValues[index].ItemSerial }</Text>
               </View>
-              <Text>Amount To Return</Text>
+              <Text style={style.lineBreakText}></Text>
+              <Text style={style.textStyleReturn}>Amount To Return:</Text>
               <View>
               <TextInput style={style.input} value={String(formValues[index].amountToReturn)} onChangeText={text => handleChangeAmount(text, index)} />
               </View>
-              <Text>Reason Lost</Text>
+              <Text style={style.textStyleReturn}>Reason Lost:</Text>
               <View>
               <TextInput style={style.input} value={String(formValues[index].reasonLost)} onChangeText={text => handleChangeReason(text, index)} />
+              <Text style={style.afterReturnBreak}></Text>
             </View>
             </View>
           ))}
-      <Button style={style.buttonStyle} onPress={() => checkReturn()} title="submit" color="#a10022"></Button>
-          
-      <StatusBar style="auto" />
-      </ScrollView>
+          <Text>{"\n"}</Text>
+          <Pressable style={style.buttonStyle} onPress={() => checkReturn()}>
+            <Text style={style.buttonTextStyle}>Submit</Text>
+          </Pressable>
+              
+          <StatusBar style="auto" />
+        </ScrollView>
       </SafeAreaView>
       )
   }

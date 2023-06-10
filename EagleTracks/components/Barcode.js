@@ -3,10 +3,14 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { TextInput, Text, View, StyleSheet, Button, Linking } from "react-native";
 
 
-const Barcode = (navigation, props) => {
+const Barcode = ({navigation, props, style, route}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-  
+    const routeIndex = route.params.index;
+    //console.log(routeIndex)
+    const [returnString, setReturnString] = useState('') 
+    
+
     useEffect(() => {
       (async() => {
           const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -14,17 +18,13 @@ const Barcode = (navigation, props) => {
       })();
     }, []);
 
-if(props.children) {
-    this.children=props.children;
-} else {
-    this.children = <></>
-}
 
 const handleBarCodeScanned = ({type, data}) => {
     setScanned(true);
     const array = data.split("-");
     data = array[1];
     alert(`BarCode: ${data}`);
+    setReturnString(data)
 };
 
 if (hasPermission == null) {
@@ -38,9 +38,10 @@ return (
     <View style={styles.contianer}>
     <BarCodeScanner 
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={ {height: 600, width: 400 }}
+        style={ {height: 500, width: 400 }}
     />
     {scanned && <Button title='Scan again' onPress={() => setScanned(false)}/>}
+    <Button title='Submit' onPress={() => navigation.navigate('Checkout Items',  {returnString, routeIndex}) } />
     </View>
 );
 };
