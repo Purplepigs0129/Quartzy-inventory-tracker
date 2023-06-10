@@ -34,7 +34,6 @@ const ReturnPage = ({navigation, style}) => {
           onChangeText={
             (value)=>setOrderNum(value)
           }
-          
         />
         
         <Pressable style={style.buttonStyle} onPress={() => checkReturn()}>

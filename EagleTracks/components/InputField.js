@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { TextInput, View, Text } from 'react-native';
 
 const InputField = (props) => {
-    const [value, setValue] = useState(); //This is an integer
+    const [value, setValue] = useState(); 
     this.label = props.label;
     this.checkFunctions = props.checkFunctions;
     this.children=props.children //Assumed to be the barcode scanner or other component
@@ -25,6 +25,7 @@ const InputField = (props) => {
                     (entry)=>{
                         setValue(entry)
                         verifyData();
+                        props.onChange(entry);
                     }
              }
          >

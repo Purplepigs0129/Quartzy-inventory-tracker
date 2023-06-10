@@ -3,7 +3,17 @@ import * as secureStore from "./SecureStore"
 
 const db = SQLite.openDatabase('quartzy-test3.db')
 
+function createTestDb(){
+    console.log("Creating test Db...")
+    createTransactions();
+    createCheckouts();
+    createReturns();
+    //(studentName, instName, className, roomNum, studentEmail, formValues, navigation)
+}
+
+
 //CREATION SCRIPTS*****************************************************************************
+
 
 async function createTransactions(){
     promise = new Promise((resolve, reject) => {
@@ -74,10 +84,7 @@ async function getAll(){
         });
     });
 
-    promise.then((value) => {
-        console.log(value)//all
-        return value
-    })
+    return await promise;
 }
 
 async function getAllCheckouts(){
@@ -254,6 +261,18 @@ async function getMaxID(formValues, navigation){
           })
     })
 }
+async function getMaxIDWithoutValues(formValues, navigation){
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM transactions ORDER BY OrderNum DESC LIMIT 1',
+                [],
+                (resp, result) => resolve(result.rows._array),
+                (resp, error) => reject(error),
+            );
+        });
+    }).then ((value)=> {return value[0]['OrderNum']} );
+}
 
 async function handleCheckout(studentName, instName, className, roomNum, studentEmail, formValues, navigation){
     var labID = await secureStore.getValueFor('LabID')
@@ -272,6 +291,21 @@ async function handleCheckout(studentName, instName, className, roomNum, student
         getMaxID(formValues, navigation)
     })
 }
+
+async function insertTransaction(studentName, instName, className, roomNum, studentEmail){
+    var labID = await secureStore.getValueFor('LabID')
+    promise = new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                `INSERT INTO transactions (LabID, ProfName, ClassName, RoomNum, StudentName, StudentEmail, DateOfTransaction) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                [labID, instName, className, roomNum, studentName, studentEmail, String(Date())],
+                (resp, result) => resolve(result.insertId),
+                (resp, error) => reject(error),
+            );
+        });
+    });
+}
+
 
 //END ITEM CHECKOUT***************************************************************************************************
 
@@ -360,4 +394,4 @@ async function getReturns(orderNum, navigation){
 
 //END RETURNS*****************************************************************************************************
 
-export {createTransactions, createReturns, createCheckouts, getAll, deleteTest, handleCheckout, getReturns, getAllCheckouts, getAllReturns, updateCheckouts, insertReturn, getTransactionsWhere, getCheckoutsWhere, getReturnsWhere}
+export {createTestDb,createTransactions, createReturns, createCheckouts, getAll, deleteTest, handleCheckout, getReturns, getAllCheckouts, getAllReturns, updateCheckouts, insertReturn, getTransactionsWhere, getCheckoutsWhere, getReturnsWhere}
