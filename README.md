@@ -1,15 +1,19 @@
 # EagleTracks
 EagleTracks is an unofficial companion app for use with Quartzy lab management to track items as they change location, are consumed or broken, and make real time adjustments to Quartzy's inventory.  
 
+# Filse
+
 The app project files are all stored in the EagleTracks folder.
 
 All data related to the app is stored across the branches: main, Arthur-Branch, Barcode-scanner, and CSV-Branch, and in the forks CKappes-Git/Quartzy-inventory-tracker, and A-Tanner/Quartzy-inventory-tracker.  
+
+# Install
 
 To run this code, you will need React Native Expo and, by extension, Node.js.  
 
 Node.js can be installed through their website: https://nodejs.org/en
 
-Once Node.js in installed, all other requirements can be installed by cloning the repo, navigating to the EagleTracks folder, and running:
+Once Node.js in installed, all other requirements can be installed by cloning the repo or downloading our code, navigating to the EagleTracks folder, and running:
 
 "npm install"
 
