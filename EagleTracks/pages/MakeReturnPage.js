@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
-import * as API from '../apiFunctions.js'
-import * as dbFunctions from "../dbFunctions.js"
-import * as itemDB from '../itemDB.js'
+import * as API from '../functions/apiFunctions.js'
+import * as dbFunctions from "../functions/dbFunctions.js"
+import * as itemDB from '../functions/itemDB.js'
 
 const MakeReturnPage = ({route, navigation, style}) => {
     console.log("In Make Return Page")

@@ -35,13 +35,6 @@ const HomePage = ({navigation, style}) => {
           <Text style={style.lineBreakText}></Text>
           <Text style={style.homeButtonText}>View Transactions</Text>
         </Pressable>
-        {/*<Button style={style.homeButtonStyle} onPress={() => navigation.navigate('Get Order Number')} title="Process Return" color="#a10022"/>
-        <Text></Text>
-        <Button style={style.homeButtonStyle} onPress={() => navigation.navigate('Checkout Items')} title="Checkout Items" color="#a10022"/>
-        <Text></Text>
-        <Button style={style.homeButtonStyle} onPress={() => navigation.navigate('Check Quantity')} title="Check Item Quantity" color="#a10022"/>
-        <Text></Text>
-        <Button style={style.homeButtonStyle} onPress={() => navigation.navigate('Add New Item')} title="Update Item List" color="#a10022"/>*/}
         <StatusBar style="auto" />
       </View>
     )

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, Text, View, Button, TextInput} from 'react-native';
-import * as db from '../dbFunctions.js'
+import * as db from '../functions/dbFunctions.js'
 
 const ReturnPage = ({navigation, style}) => {
     const [orderNum, setOrderNum] = useState('');

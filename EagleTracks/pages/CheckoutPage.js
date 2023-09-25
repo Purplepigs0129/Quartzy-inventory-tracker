@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import {ScrollView, View, Text, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
-import * as API from '../apiFunctions.js'
-import * as dbFunctions from "../dbFunctions.js"
-import * as itemDB from "../itemDB.js"
+import * as API from '../functions/apiFunctions.js'
+import * as dbFunctions from "../functions/dbFunctions.js"
+import * as itemDB from "../functions/itemDB.js"
 import { FontAwesome5 } from '@expo/vector-icons';
 import Barcode from '../components/Barcode.js';
+import { checkText } from "../functions/textInputCheck.js"
 
 const CheckoutPage = ({navigation, route, props, style}) => {
 
@@ -21,37 +22,34 @@ const CheckoutPage = ({navigation, route, props, style}) => {
 
     const checkDecrease = () => {
       let testRun = true
-      console.log("button pressed")
-      if(!(studentName.trim())){
+      console.log("button pressed, beginning test run")
+
+      //test single input fields
+      if(!(checkText([studentName, instName, roomNum, className, studentEmail], ['Group/Name', 'Instructor', 'Destination room number', 'Class name', 'Student email']))){
         testRun = false
-        alert('Group/Name is empty');
-      }else if(!(instName.trim())){
-        testRun = false
-        alert('Instructor is empty');
-      }else if(!(roomNum.trim())){
-        testRun = false
-        alert('Destination room number is empty');
-      }else if(!(className.trim())){
-        testRun = false
-        alert('Class name is empty');
       }
-      for (let i = 0; i < formValues.length; i++){
-        if(!(formValues[i].itemToCheck.trim())){
-            testRun = false
-            alert(`Item ${i + 1} is not filled in`)
-            break
-        }else if(!(formValues[i].numNeeded.trim())){
-            testRun = false
-            alert(`Amount needed for ${i + 1} is not filled in`)
-            break
-        } else if(!(parseInt(formValues[i].numNeeded))){
-            testRun = false
-            alert(`Amount needed for item ${i + 1} is not a number`)
-            break
+      
+      //test repeating input fields
+      if(testRun){//if the test run for the previous values passed
+        for (let i = 0; i < formValues.length; i++){
+          if(!(formValues[i].itemToCheck.trim())){
+              testRun = false
+              alert(`Item ${i + 1} is not filled in`)
+              break
+          }else if(!(formValues[i].numNeeded.trim())){
+              testRun = false
+              alert(`Amount needed for ${i + 1} is not filled in`)
+              break
+          } else if(!(parseInt(formValues[i].numNeeded))){
+              testRun = false
+              alert(`Amount needed for item ${i + 1} is not a number`)
+              break
+          }
         }
       }
-      console.log("comp")
-      if(testRun){
+      console.log("completed test run")
+
+      if(testRun){//if the input tests pass
         navigation.navigate('Working Page');
         updateFormValues()
       }

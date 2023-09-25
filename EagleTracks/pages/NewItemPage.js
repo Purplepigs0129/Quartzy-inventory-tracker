@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View,  Button, TextInput} from 'react-native';
-import * as API from '../apiFunctions.js'
+import * as API from '../functions/apiFunctions.js'
 
 const NewItemPage = ({navigation, style}) => {
     const updateList = (navigation) => {
@@ -12,8 +12,6 @@ const NewItemPage = ({navigation, style}) => {
       <View style={style.container}>
         
         <Button style={style.buttonStyle} onPress={() => updateList(navigation)} title="Update List" color="#a10022" />
-        {/*<Button onPress={() => API.incr("945eadcc-319a-4c21-89f2-1901defd742e", 5, false, navigation)} title="Decrease by 5" color="#841584" />*/}
-        {/*<Button onPress={() => navigation.navigate('Home')} title="Return Home" color="#841584"/>*/}
       <StatusBar style="auto" />
       </View>
       )

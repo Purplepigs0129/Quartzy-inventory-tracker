@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as itemDB from './itemDB'
-import * as secureStore from "./SecureStore"
+import * as secureStore from "../SecureStore"
 
 //Get All**********************************************************************************
 

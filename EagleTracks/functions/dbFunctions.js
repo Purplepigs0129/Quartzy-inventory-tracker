@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite'
-import * as secureStore from "./SecureStore"
+import * as secureStore from "../SecureStore"
 
 const db = SQLite.openDatabase('quartzy-test3.db')
 

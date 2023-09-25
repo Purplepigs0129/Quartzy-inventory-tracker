@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox from 'expo-checkbox'
 import { StyleSheet, Dimensions, Platform, PixelRatio, ScrollView, Text, View, SafeAreaView, Button, TextInput} from 'react-native';
-import * as API from './apiFunctions.js'
+import * as API from './functions/apiFunctions.js'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //Should really look into cleaning up all the page imports.
@@ -20,8 +20,8 @@ import GetOrderNumPage from './pages/GetOrderNumPage.js'
 import MakeReturnPage from './pages/MakeReturnPage.js'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage.js'
 import AppManagementPage from './pages/AppManagement.js'
-import {createTransactions, createReturns, createCheckouts} from './dbFunctions.js'
-import { createQuartzyTable, getFileLocation } from './itemDB.js';
+import {createTransactions, createReturns, createCheckouts} from './functions/dbFunctions.js'
+import { createQuartzyTable, getFileLocation } from './functions/itemDB.js';
 import Barcode from './components/Barcode.js';
 
 //Initialization*****************************************************************

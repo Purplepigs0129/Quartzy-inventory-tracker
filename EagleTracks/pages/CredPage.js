@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import {Text, View, Button, TextInput} from 'react-native';
 import * as SecureStore from '../SecureStore'
+import { checkText } from '../functions/textInputCheck'
 
 const CredPage = ({navigation, style}) => {
     const [newAccess, setAccess] = useState('');
@@ -9,13 +10,7 @@ const CredPage = ({navigation, style}) => {
     const [newLocation, setLocation] = useState('')
 
     const checkAccess = () => {
-      if(!(newAccess.trim())){
-        alert('Item Access Token is empty');
-      }else if(!(newLab.trim())){
-        alert('Lab ID is empty');
-      }else if(!(newLocation.trim())){
-        alert('Location tag is empty');
-      }else{
+      if (checkText([newAccess, newLab, newLocation], ['Item Access Token', 'Lab ID', 'Location tag'])){
         navigation.navigate('Working Page');
         credChanger();
       }
